@@ -29,7 +29,7 @@ reserved = {
 #Sequencia de tokens, puede ser lista o tupla
 tokens = ('NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN',
           'LLLAVE', 'RLLAVE', 'VARIABLE', 'CADENA', 'PUNTOYCOMA',
-          'EXCLAMACION', 'IGUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET','DOUBLE_POINT','POINT') + tuple(reserved.values())
+          'EXCLAMACION', 'IGUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET','DOUBLE_POINT','POINT','PERCENTAGE','AND','OR','XOR') + tuple(reserved.values())
 
 #Exp Regulares para tokens de símbolos
 #Xavier Magallanes
@@ -50,6 +50,10 @@ t_L_BRACKET = r'\['
 t_R_BRACKET = r'\]'
 t_DOUBLE_POINT = r'\:'
 t_POINT = r'\.'
+t_PERCENTAGE= r'\%'
+t_AND = r'\&'
+t_OR =r'\|'
+t_XOR = r'\^'
 
 #Para contabilizar nro de líneas
 def t_newline(t):
