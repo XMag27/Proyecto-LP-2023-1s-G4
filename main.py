@@ -33,13 +33,14 @@ reserved = {
     'mod': 'MOD',
     'trait': 'TRAIT',
     'pub': 'PUB',
+    
 
 }
 
 # Sequencia de tokens, puede ser lista o tupla
 tokens = ('NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN',
           'LLLAVE', 'RLLAVE', 'VARIABLE', 'CADENA', 'PUNTOYCOMA',
-          'EXCLAMACION', 'IGUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET', 'DOUBLE_POINT', 'POINT', 'PERCENTAGE', 'AND', 'OR',
+          'EXCLAMACION', 'IGUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET', 'DOUBLE_POINT', 'POINT', 'PERCENTAGE', 'AND', 'OR', 'BITAND' , 'BITOR', 'BITXOR'
           'L_DIAMOND', 'R_DIAMOND', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW',
           'AMPERSAND') + tuple(reserved.values())
 
@@ -58,6 +59,7 @@ t_NUMBER = r'\d+'
 t_PUNTOYCOMA = r'\;'
 t_EXCLAMACION = r'\!'
 t_IGUAL = r'\='
+# Fausto Jacome
 t_L_BRACKET = r'\['
 t_R_BRACKET = r'\]'
 t_DOUBLE_POINT = r'\:'
@@ -65,6 +67,9 @@ t_POINT = r'\.'
 t_PERCENTAGE = r'\%'
 t_AND = r'\&&'
 t_OR = r'\|\|'
+t_BITAND = r'\&'
+t_BITOR = r'\|'
+t_BITXOR = r'\^'
 # Donoso Bravo Luis Alejandro
 t_L_DIAMOND = r'\<'
 t_R_DIAMOND = r'\>'
@@ -74,6 +79,7 @@ t_LESS_EQUAL = r'\<\='
 t_GREATER_EQUAL = r'\>\='
 t_AMPERSAND = r'\&'
 t_ARROW = r'\->'
+
 
 
 # Para contabilizar nro de líneas
