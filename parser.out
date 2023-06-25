@@ -1,0 +1,1817 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    AS
+    BITAND
+    BITOR
+    BITXOR
+    BREAK
+    CONST
+    CONTINUE
+    DIVIDE
+    ELSE
+    ENUM
+    EQUAL_EQUAL
+    EXCLAMATION
+    FOR
+    GREATER_EQUAL
+    IF
+    IMPL
+    LESS_EQUAL
+    LOOP
+    L_BRACKET
+    MAIN
+    MATCH
+    MINUS
+    MOD
+    MUT
+    NOT_EQUAL
+    OR
+    PERCENTAGE
+    PLUS
+    POINT
+    PRINT
+    PUB
+    REF
+    RETURN
+    R_BRACKET
+    STATIC
+    TIMES
+    TRAIT
+    TYPE
+    VEC
+    WHILE
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> programa item
+Rule 2     programa -> item
+Rule 3     item -> declaracion
+Rule 4     item -> importacion
+Rule 5     item -> funcion
+Rule 6     item -> error
+Rule 7     declaracion -> declaracion_variable
+Rule 8     declaracion -> declaracion_estructura
+Rule 9     declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+Rule 10    declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON
+Rule 11    declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON
+Rule 12    declaracion_variable -> LET VARIABLE SEMICOLON
+Rule 13    declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON
+Rule 14    declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON
+Rule 15    campos -> campos COMMA campo
+Rule 16    campos -> campo
+Rule 17    campo -> VARIABLE DOUBLE_POINT tipo
+Rule 18    tipo -> tipo_simple
+Rule 19    tipo_simple -> INT8
+Rule 20    tipo_simple -> INT16
+Rule 21    tipo_simple -> INT32
+Rule 22    tipo_simple -> INT64
+Rule 23    tipo_simple -> UINT8
+Rule 24    tipo_simple -> UINT16
+Rule 25    tipo_simple -> UINT32
+Rule 26    tipo_simple -> UINT64
+Rule 27    tipo_simple -> FLOAT32
+Rule 28    tipo_simple -> FLOAT64
+Rule 29    tipo_simple -> BOOL
+Rule 30    tipo_simple -> CHAR
+Rule 31    tipo_simple -> STR
+Rule 32    importacion -> USE VARIABLE SEMICOLON
+Rule 33    funcion -> funcion_generica
+Rule 34    funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque
+Rule 35    parametros -> parametros COMMA parametro
+Rule 36    parametros -> parametro
+Rule 37    parametros -> empty
+Rule 38    empty -> <empty>
+Rule 39    parametro -> VARIABLE DOUBLE_POINT tipo
+Rule 40    bloque -> LBRACKET sentencias RBRACKET
+Rule 41    sentencias -> sentencias sentencia
+Rule 42    sentencias -> sentencia
+Rule 43    sentencia -> expresion SEMICOLON
+Rule 44    sentencia -> declaracion
+Rule 45    sentencia -> asignacion
+Rule 46    asignacion -> VARIABLE EQUAL expresion SEMICOLON
+Rule 47    expresion -> expresion_literal
+Rule 48    expresion -> expresion_variable
+Rule 49    expresion -> expresion_funcion
+Rule 50    expresion -> expresion_estructura
+Rule 51    expresion_literal -> literal
+Rule 52    literal -> NUMBER
+Rule 53    literal -> STRING
+Rule 54    literal -> TRUE
+Rule 55    literal -> FALSE
+Rule 56    expresion_variable -> VARIABLE
+Rule 57    expresion_funcion -> VARIABLE LPAREN argumentos RPAREN SEMICOLON
+Rule 58    expresion_estructura -> hashmap
+Rule 59    hashmap -> LDIAMOND hashmap_types RDIAMOND
+Rule 60    hashmap_types -> hashmap_types COMMA hashmap_type
+Rule 61    hashmap_types -> hashmap_type
+Rule 62    hashmap_type -> tipo
+Rule 63    argumentos -> argumentos COMMA argumento
+Rule 64    argumentos -> argumento
+Rule 65    argumentos -> empty
+Rule 66    argumento -> expresion
+
+Terminals, with rules where they appear
+
+AND                  : 
+ARROW                : 34
+AS                   : 
+BITAND               : 
+BITOR                : 
+BITXOR               : 
+BOOL                 : 29
+BREAK                : 
+CHAR                 : 30
+COMMA                : 15 35 60 63
+CONST                : 
+CONTINUE             : 
+DIVIDE               : 
+DOUBLE_POINT         : 9 10 17 39
+ELSE                 : 
+ENUM                 : 
+EQUAL                : 9 11 46
+EQUAL_EQUAL          : 
+EXCLAMATION          : 
+FALSE                : 55
+FLOAT32              : 27
+FLOAT64              : 28
+FN                   : 34
+FOR                  : 
+GREATER_EQUAL        : 
+IF                   : 
+IMPL                 : 
+INT16                : 20
+INT32                : 21
+INT64                : 22
+INT8                 : 19
+LBRACKET             : 13 14 40
+LDIAMOND             : 59
+LESS_EQUAL           : 
+LET                  : 9 10 11 12
+LOOP                 : 
+LPAREN               : 34 57
+L_BRACKET            : 
+MAIN                 : 
+MATCH                : 
+MINUS                : 
+MOD                  : 
+MUT                  : 
+NOT_EQUAL            : 
+NUMBER               : 52
+OR                   : 
+PERCENTAGE           : 
+PLUS                 : 
+POINT                : 
+PRINT                : 
+PUB                  : 
+RBRACKET             : 13 14 40
+RDIAMOND             : 59
+REF                  : 
+RETURN               : 
+RPAREN               : 34 57
+R_BRACKET            : 
+SEMICOLON            : 9 10 11 12 13 14 32 43 46 57
+STATIC               : 
+STR                  : 31
+STRING               : 53
+STRUCT               : 13 14
+TIMES                : 
+TRAIT                : 
+TRUE                 : 54
+TYPE                 : 
+UINT16               : 24
+UINT32               : 25
+UINT64               : 26
+UINT8                : 23
+USE                  : 32
+VARIABLE             : 9 10 11 12 13 14 17 32 34 39 46 56 57
+VEC                  : 
+WHILE                : 
+error                : 6
+
+Nonterminals, with rules where they appear
+
+argumento            : 63 64
+argumentos           : 57 63
+asignacion           : 45
+bloque               : 34
+campo                : 15 16
+campos               : 13 15
+declaracion          : 3 44
+declaracion_estructura : 8
+declaracion_variable : 7
+empty                : 37 65
+expresion            : 9 11 43 46 66
+expresion_estructura : 50
+expresion_funcion    : 49
+expresion_literal    : 47
+expresion_variable   : 48
+funcion              : 5
+funcion_generica     : 33
+hashmap              : 58
+hashmap_type         : 60 61
+hashmap_types        : 59 60
+importacion          : 4
+item                 : 1 2
+literal              : 51
+parametro            : 35 36
+parametros           : 34 35
+programa             : 1 0
+sentencia            : 41 42
+sentencias           : 40 41
+tipo                 : 9 10 17 39 62
+tipo_simple          : 18 34
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . programa item
+    (2) programa -> . item
+    (3) item -> . declaracion
+    (4) item -> . importacion
+    (5) item -> . funcion
+    (6) item -> . error
+    (7) declaracion -> . declaracion_variable
+    (8) declaracion -> . declaracion_estructura
+    (32) importacion -> . USE VARIABLE SEMICOLON
+    (33) funcion -> . funcion_generica
+    (9) declaracion_variable -> . LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+    (10) declaracion_variable -> . LET VARIABLE DOUBLE_POINT tipo SEMICOLON
+    (11) declaracion_variable -> . LET VARIABLE EQUAL expresion SEMICOLON
+    (12) declaracion_variable -> . LET VARIABLE SEMICOLON
+    (13) declaracion_estructura -> . STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON
+    (14) declaracion_estructura -> . STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON
+    (34) funcion_generica -> . FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque
+
+    error           shift and go to state 6
+    USE             shift and go to state 9
+    LET             shift and go to state 11
+    STRUCT          shift and go to state 12
+    FN              shift and go to state 13
+
+    programa                       shift and go to state 1
+    item                           shift and go to state 2
+    declaracion                    shift and go to state 3
+    importacion                    shift and go to state 4
+    funcion                        shift and go to state 5
+    declaracion_variable           shift and go to state 7
+    declaracion_estructura         shift and go to state 8
+    funcion_generica               shift and go to state 10
+
+state 1
+
+    (0) S' -> programa .
+    (1) programa -> programa . item
+    (3) item -> . declaracion
+    (4) item -> . importacion
+    (5) item -> . funcion
+    (6) item -> . error
+    (7) declaracion -> . declaracion_variable
+    (8) declaracion -> . declaracion_estructura
+    (32) importacion -> . USE VARIABLE SEMICOLON
+    (33) funcion -> . funcion_generica
+    (9) declaracion_variable -> . LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+    (10) declaracion_variable -> . LET VARIABLE DOUBLE_POINT tipo SEMICOLON
+    (11) declaracion_variable -> . LET VARIABLE EQUAL expresion SEMICOLON
+    (12) declaracion_variable -> . LET VARIABLE SEMICOLON
+    (13) declaracion_estructura -> . STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON
+    (14) declaracion_estructura -> . STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON
+    (34) funcion_generica -> . FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque
+
+    error           shift and go to state 6
+    USE             shift and go to state 9
+    LET             shift and go to state 11
+    STRUCT          shift and go to state 12
+    FN              shift and go to state 13
+
+    item                           shift and go to state 14
+    declaracion                    shift and go to state 3
+    importacion                    shift and go to state 4
+    funcion                        shift and go to state 5
+    declaracion_variable           shift and go to state 7
+    declaracion_estructura         shift and go to state 8
+    funcion_generica               shift and go to state 10
+
+state 2
+
+    (2) programa -> item .
+
+    error           reduce using rule 2 (programa -> item .)
+    USE             reduce using rule 2 (programa -> item .)
+    LET             reduce using rule 2 (programa -> item .)
+    STRUCT          reduce using rule 2 (programa -> item .)
+    FN              reduce using rule 2 (programa -> item .)
+    $end            reduce using rule 2 (programa -> item .)
+
+
+state 3
+
+    (3) item -> declaracion .
+
+    error           reduce using rule 3 (item -> declaracion .)
+    USE             reduce using rule 3 (item -> declaracion .)
+    LET             reduce using rule 3 (item -> declaracion .)
+    STRUCT          reduce using rule 3 (item -> declaracion .)
+    FN              reduce using rule 3 (item -> declaracion .)
+    $end            reduce using rule 3 (item -> declaracion .)
+
+
+state 4
+
+    (4) item -> importacion .
+
+    error           reduce using rule 4 (item -> importacion .)
+    USE             reduce using rule 4 (item -> importacion .)
+    LET             reduce using rule 4 (item -> importacion .)
+    STRUCT          reduce using rule 4 (item -> importacion .)
+    FN              reduce using rule 4 (item -> importacion .)
+    $end            reduce using rule 4 (item -> importacion .)
+
+
+state 5
+
+    (5) item -> funcion .
+
+    error           reduce using rule 5 (item -> funcion .)
+    USE             reduce using rule 5 (item -> funcion .)
+    LET             reduce using rule 5 (item -> funcion .)
+    STRUCT          reduce using rule 5 (item -> funcion .)
+    FN              reduce using rule 5 (item -> funcion .)
+    $end            reduce using rule 5 (item -> funcion .)
+
+
+state 6
+
+    (6) item -> error .
+
+    error           reduce using rule 6 (item -> error .)
+    USE             reduce using rule 6 (item -> error .)
+    LET             reduce using rule 6 (item -> error .)
+    STRUCT          reduce using rule 6 (item -> error .)
+    FN              reduce using rule 6 (item -> error .)
+    $end            reduce using rule 6 (item -> error .)
+
+
+state 7
+
+    (7) declaracion -> declaracion_variable .
+
+    error           reduce using rule 7 (declaracion -> declaracion_variable .)
+    USE             reduce using rule 7 (declaracion -> declaracion_variable .)
+    LET             reduce using rule 7 (declaracion -> declaracion_variable .)
+    STRUCT          reduce using rule 7 (declaracion -> declaracion_variable .)
+    FN              reduce using rule 7 (declaracion -> declaracion_variable .)
+    $end            reduce using rule 7 (declaracion -> declaracion_variable .)
+    RBRACKET        reduce using rule 7 (declaracion -> declaracion_variable .)
+    VARIABLE        reduce using rule 7 (declaracion -> declaracion_variable .)
+    NUMBER          reduce using rule 7 (declaracion -> declaracion_variable .)
+    STRING          reduce using rule 7 (declaracion -> declaracion_variable .)
+    TRUE            reduce using rule 7 (declaracion -> declaracion_variable .)
+    FALSE           reduce using rule 7 (declaracion -> declaracion_variable .)
+    LDIAMOND        reduce using rule 7 (declaracion -> declaracion_variable .)
+
+
+state 8
+
+    (8) declaracion -> declaracion_estructura .
+
+    error           reduce using rule 8 (declaracion -> declaracion_estructura .)
+    USE             reduce using rule 8 (declaracion -> declaracion_estructura .)
+    LET             reduce using rule 8 (declaracion -> declaracion_estructura .)
+    STRUCT          reduce using rule 8 (declaracion -> declaracion_estructura .)
+    FN              reduce using rule 8 (declaracion -> declaracion_estructura .)
+    $end            reduce using rule 8 (declaracion -> declaracion_estructura .)
+    RBRACKET        reduce using rule 8 (declaracion -> declaracion_estructura .)
+    VARIABLE        reduce using rule 8 (declaracion -> declaracion_estructura .)
+    NUMBER          reduce using rule 8 (declaracion -> declaracion_estructura .)
+    STRING          reduce using rule 8 (declaracion -> declaracion_estructura .)
+    TRUE            reduce using rule 8 (declaracion -> declaracion_estructura .)
+    FALSE           reduce using rule 8 (declaracion -> declaracion_estructura .)
+    LDIAMOND        reduce using rule 8 (declaracion -> declaracion_estructura .)
+
+
+state 9
+
+    (32) importacion -> USE . VARIABLE SEMICOLON
+
+    VARIABLE        shift and go to state 15
+
+
+state 10
+
+    (33) funcion -> funcion_generica .
+
+    error           reduce using rule 33 (funcion -> funcion_generica .)
+    USE             reduce using rule 33 (funcion -> funcion_generica .)
+    LET             reduce using rule 33 (funcion -> funcion_generica .)
+    STRUCT          reduce using rule 33 (funcion -> funcion_generica .)
+    FN              reduce using rule 33 (funcion -> funcion_generica .)
+    $end            reduce using rule 33 (funcion -> funcion_generica .)
+
+
+state 11
+
+    (9) declaracion_variable -> LET . VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+    (10) declaracion_variable -> LET . VARIABLE DOUBLE_POINT tipo SEMICOLON
+    (11) declaracion_variable -> LET . VARIABLE EQUAL expresion SEMICOLON
+    (12) declaracion_variable -> LET . VARIABLE SEMICOLON
+
+    VARIABLE        shift and go to state 16
+
+
+state 12
+
+    (13) declaracion_estructura -> STRUCT . VARIABLE LBRACKET campos RBRACKET SEMICOLON
+    (14) declaracion_estructura -> STRUCT . VARIABLE LBRACKET RBRACKET SEMICOLON
+
+    VARIABLE        shift and go to state 17
+
+
+state 13
+
+    (34) funcion_generica -> FN . VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque
+
+    VARIABLE        shift and go to state 18
+
+
+state 14
+
+    (1) programa -> programa item .
+
+    error           reduce using rule 1 (programa -> programa item .)
+    USE             reduce using rule 1 (programa -> programa item .)
+    LET             reduce using rule 1 (programa -> programa item .)
+    STRUCT          reduce using rule 1 (programa -> programa item .)
+    FN              reduce using rule 1 (programa -> programa item .)
+    $end            reduce using rule 1 (programa -> programa item .)
+
+
+state 15
+
+    (32) importacion -> USE VARIABLE . SEMICOLON
+
+    SEMICOLON       shift and go to state 19
+
+
+state 16
+
+    (9) declaracion_variable -> LET VARIABLE . DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+    (10) declaracion_variable -> LET VARIABLE . DOUBLE_POINT tipo SEMICOLON
+    (11) declaracion_variable -> LET VARIABLE . EQUAL expresion SEMICOLON
+    (12) declaracion_variable -> LET VARIABLE . SEMICOLON
+
+    DOUBLE_POINT    shift and go to state 20
+    EQUAL           shift and go to state 21
+    SEMICOLON       shift and go to state 22
+
+
+state 17
+
+    (13) declaracion_estructura -> STRUCT VARIABLE . LBRACKET campos RBRACKET SEMICOLON
+    (14) declaracion_estructura -> STRUCT VARIABLE . LBRACKET RBRACKET SEMICOLON
+
+    LBRACKET        shift and go to state 23
+
+
+state 18
+
+    (34) funcion_generica -> FN VARIABLE . LPAREN parametros RPAREN ARROW tipo_simple bloque
+
+    LPAREN          shift and go to state 24
+
+
+state 19
+
+    (32) importacion -> USE VARIABLE SEMICOLON .
+
+    error           reduce using rule 32 (importacion -> USE VARIABLE SEMICOLON .)
+    USE             reduce using rule 32 (importacion -> USE VARIABLE SEMICOLON .)
+    LET             reduce using rule 32 (importacion -> USE VARIABLE SEMICOLON .)
+    STRUCT          reduce using rule 32 (importacion -> USE VARIABLE SEMICOLON .)
+    FN              reduce using rule 32 (importacion -> USE VARIABLE SEMICOLON .)
+    $end            reduce using rule 32 (importacion -> USE VARIABLE SEMICOLON .)
+
+
+state 20
+
+    (9) declaracion_variable -> LET VARIABLE DOUBLE_POINT . tipo EQUAL expresion SEMICOLON
+    (10) declaracion_variable -> LET VARIABLE DOUBLE_POINT . tipo SEMICOLON
+    (18) tipo -> . tipo_simple
+    (19) tipo_simple -> . INT8
+    (20) tipo_simple -> . INT16
+    (21) tipo_simple -> . INT32
+    (22) tipo_simple -> . INT64
+    (23) tipo_simple -> . UINT8
+    (24) tipo_simple -> . UINT16
+    (25) tipo_simple -> . UINT32
+    (26) tipo_simple -> . UINT64
+    (27) tipo_simple -> . FLOAT32
+    (28) tipo_simple -> . FLOAT64
+    (29) tipo_simple -> . BOOL
+    (30) tipo_simple -> . CHAR
+    (31) tipo_simple -> . STR
+
+    INT8            shift and go to state 27
+    INT16           shift and go to state 28
+    INT32           shift and go to state 29
+    INT64           shift and go to state 30
+    UINT8           shift and go to state 31
+    UINT16          shift and go to state 32
+    UINT32          shift and go to state 33
+    UINT64          shift and go to state 34
+    FLOAT32         shift and go to state 35
+    FLOAT64         shift and go to state 36
+    BOOL            shift and go to state 37
+    CHAR            shift and go to state 38
+    STR             shift and go to state 39
+
+    tipo                           shift and go to state 25
+    tipo_simple                    shift and go to state 26
+
+state 21
+
+    (11) declaracion_variable -> LET VARIABLE EQUAL . expresion SEMICOLON
+    (47) expresion -> . expresion_literal
+    (48) expresion -> . expresion_variable
+    (49) expresion -> . expresion_funcion
+    (50) expresion -> . expresion_estructura
+    (51) expresion_literal -> . literal
+    (56) expresion_variable -> . VARIABLE
+    (57) expresion_funcion -> . VARIABLE LPAREN argumentos RPAREN SEMICOLON
+    (58) expresion_estructura -> . hashmap
+    (52) literal -> . NUMBER
+    (53) literal -> . STRING
+    (54) literal -> . TRUE
+    (55) literal -> . FALSE
+    (59) hashmap -> . LDIAMOND hashmap_types RDIAMOND
+
+    VARIABLE        shift and go to state 40
+    NUMBER          shift and go to state 48
+    STRING          shift and go to state 49
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
+    LDIAMOND        shift and go to state 52
+
+    expresion                      shift and go to state 41
+    expresion_literal              shift and go to state 42
+    expresion_variable             shift and go to state 43
+    expresion_funcion              shift and go to state 44
+    expresion_estructura           shift and go to state 45
+    literal                        shift and go to state 46
+    hashmap                        shift and go to state 47
+
+state 22
+
+    (12) declaracion_variable -> LET VARIABLE SEMICOLON .
+
+    error           reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    USE             reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    LET             reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    STRUCT          reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    FN              reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    $end            reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    RBRACKET        reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    VARIABLE        reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    NUMBER          reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    STRING          reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    TRUE            reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    FALSE           reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+    LDIAMOND        reduce using rule 12 (declaracion_variable -> LET VARIABLE SEMICOLON .)
+
+
+state 23
+
+    (13) declaracion_estructura -> STRUCT VARIABLE LBRACKET . campos RBRACKET SEMICOLON
+    (14) declaracion_estructura -> STRUCT VARIABLE LBRACKET . RBRACKET SEMICOLON
+    (15) campos -> . campos COMMA campo
+    (16) campos -> . campo
+    (17) campo -> . VARIABLE DOUBLE_POINT tipo
+
+    RBRACKET        shift and go to state 55
+    VARIABLE        shift and go to state 53
+
+    campos                         shift and go to state 54
+    campo                          shift and go to state 56
+
+state 24
+
+    (34) funcion_generica -> FN VARIABLE LPAREN . parametros RPAREN ARROW tipo_simple bloque
+    (35) parametros -> . parametros COMMA parametro
+    (36) parametros -> . parametro
+    (37) parametros -> . empty
+    (39) parametro -> . VARIABLE DOUBLE_POINT tipo
+    (38) empty -> .
+
+    VARIABLE        shift and go to state 57
+    RPAREN          reduce using rule 38 (empty -> .)
+    COMMA           reduce using rule 38 (empty -> .)
+
+    parametros                     shift and go to state 58
+    parametro                      shift and go to state 59
+    empty                          shift and go to state 60
+
+state 25
+
+    (9) declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo . EQUAL expresion SEMICOLON
+    (10) declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo . SEMICOLON
+
+    EQUAL           shift and go to state 61
+    SEMICOLON       shift and go to state 62
+
+
+state 26
+
+    (18) tipo -> tipo_simple .
+
+    EQUAL           reduce using rule 18 (tipo -> tipo_simple .)
+    SEMICOLON       reduce using rule 18 (tipo -> tipo_simple .)
+    RDIAMOND        reduce using rule 18 (tipo -> tipo_simple .)
+    COMMA           reduce using rule 18 (tipo -> tipo_simple .)
+    RBRACKET        reduce using rule 18 (tipo -> tipo_simple .)
+    RPAREN          reduce using rule 18 (tipo -> tipo_simple .)
+
+
+state 27
+
+    (19) tipo_simple -> INT8 .
+
+    EQUAL           reduce using rule 19 (tipo_simple -> INT8 .)
+    SEMICOLON       reduce using rule 19 (tipo_simple -> INT8 .)
+    RDIAMOND        reduce using rule 19 (tipo_simple -> INT8 .)
+    COMMA           reduce using rule 19 (tipo_simple -> INT8 .)
+    RBRACKET        reduce using rule 19 (tipo_simple -> INT8 .)
+    RPAREN          reduce using rule 19 (tipo_simple -> INT8 .)
+    LBRACKET        reduce using rule 19 (tipo_simple -> INT8 .)
+
+
+state 28
+
+    (20) tipo_simple -> INT16 .
+
+    EQUAL           reduce using rule 20 (tipo_simple -> INT16 .)
+    SEMICOLON       reduce using rule 20 (tipo_simple -> INT16 .)
+    RDIAMOND        reduce using rule 20 (tipo_simple -> INT16 .)
+    COMMA           reduce using rule 20 (tipo_simple -> INT16 .)
+    RBRACKET        reduce using rule 20 (tipo_simple -> INT16 .)
+    RPAREN          reduce using rule 20 (tipo_simple -> INT16 .)
+    LBRACKET        reduce using rule 20 (tipo_simple -> INT16 .)
+
+
+state 29
+
+    (21) tipo_simple -> INT32 .
+
+    EQUAL           reduce using rule 21 (tipo_simple -> INT32 .)
+    SEMICOLON       reduce using rule 21 (tipo_simple -> INT32 .)
+    RDIAMOND        reduce using rule 21 (tipo_simple -> INT32 .)
+    COMMA           reduce using rule 21 (tipo_simple -> INT32 .)
+    RBRACKET        reduce using rule 21 (tipo_simple -> INT32 .)
+    RPAREN          reduce using rule 21 (tipo_simple -> INT32 .)
+    LBRACKET        reduce using rule 21 (tipo_simple -> INT32 .)
+
+
+state 30
+
+    (22) tipo_simple -> INT64 .
+
+    EQUAL           reduce using rule 22 (tipo_simple -> INT64 .)
+    SEMICOLON       reduce using rule 22 (tipo_simple -> INT64 .)
+    RDIAMOND        reduce using rule 22 (tipo_simple -> INT64 .)
+    COMMA           reduce using rule 22 (tipo_simple -> INT64 .)
+    RBRACKET        reduce using rule 22 (tipo_simple -> INT64 .)
+    RPAREN          reduce using rule 22 (tipo_simple -> INT64 .)
+    LBRACKET        reduce using rule 22 (tipo_simple -> INT64 .)
+
+
+state 31
+
+    (23) tipo_simple -> UINT8 .
+
+    EQUAL           reduce using rule 23 (tipo_simple -> UINT8 .)
+    SEMICOLON       reduce using rule 23 (tipo_simple -> UINT8 .)
+    RDIAMOND        reduce using rule 23 (tipo_simple -> UINT8 .)
+    COMMA           reduce using rule 23 (tipo_simple -> UINT8 .)
+    RBRACKET        reduce using rule 23 (tipo_simple -> UINT8 .)
+    RPAREN          reduce using rule 23 (tipo_simple -> UINT8 .)
+    LBRACKET        reduce using rule 23 (tipo_simple -> UINT8 .)
+
+
+state 32
+
+    (24) tipo_simple -> UINT16 .
+
+    EQUAL           reduce using rule 24 (tipo_simple -> UINT16 .)
+    SEMICOLON       reduce using rule 24 (tipo_simple -> UINT16 .)
+    RDIAMOND        reduce using rule 24 (tipo_simple -> UINT16 .)
+    COMMA           reduce using rule 24 (tipo_simple -> UINT16 .)
+    RBRACKET        reduce using rule 24 (tipo_simple -> UINT16 .)
+    RPAREN          reduce using rule 24 (tipo_simple -> UINT16 .)
+    LBRACKET        reduce using rule 24 (tipo_simple -> UINT16 .)
+
+
+state 33
+
+    (25) tipo_simple -> UINT32 .
+
+    EQUAL           reduce using rule 25 (tipo_simple -> UINT32 .)
+    SEMICOLON       reduce using rule 25 (tipo_simple -> UINT32 .)
+    RDIAMOND        reduce using rule 25 (tipo_simple -> UINT32 .)
+    COMMA           reduce using rule 25 (tipo_simple -> UINT32 .)
+    RBRACKET        reduce using rule 25 (tipo_simple -> UINT32 .)
+    RPAREN          reduce using rule 25 (tipo_simple -> UINT32 .)
+    LBRACKET        reduce using rule 25 (tipo_simple -> UINT32 .)
+
+
+state 34
+
+    (26) tipo_simple -> UINT64 .
+
+    EQUAL           reduce using rule 26 (tipo_simple -> UINT64 .)
+    SEMICOLON       reduce using rule 26 (tipo_simple -> UINT64 .)
+    RDIAMOND        reduce using rule 26 (tipo_simple -> UINT64 .)
+    COMMA           reduce using rule 26 (tipo_simple -> UINT64 .)
+    RBRACKET        reduce using rule 26 (tipo_simple -> UINT64 .)
+    RPAREN          reduce using rule 26 (tipo_simple -> UINT64 .)
+    LBRACKET        reduce using rule 26 (tipo_simple -> UINT64 .)
+
+
+state 35
+
+    (27) tipo_simple -> FLOAT32 .
+
+    EQUAL           reduce using rule 27 (tipo_simple -> FLOAT32 .)
+    SEMICOLON       reduce using rule 27 (tipo_simple -> FLOAT32 .)
+    RDIAMOND        reduce using rule 27 (tipo_simple -> FLOAT32 .)
+    COMMA           reduce using rule 27 (tipo_simple -> FLOAT32 .)
+    RBRACKET        reduce using rule 27 (tipo_simple -> FLOAT32 .)
+    RPAREN          reduce using rule 27 (tipo_simple -> FLOAT32 .)
+    LBRACKET        reduce using rule 27 (tipo_simple -> FLOAT32 .)
+
+
+state 36
+
+    (28) tipo_simple -> FLOAT64 .
+
+    EQUAL           reduce using rule 28 (tipo_simple -> FLOAT64 .)
+    SEMICOLON       reduce using rule 28 (tipo_simple -> FLOAT64 .)
+    RDIAMOND        reduce using rule 28 (tipo_simple -> FLOAT64 .)
+    COMMA           reduce using rule 28 (tipo_simple -> FLOAT64 .)
+    RBRACKET        reduce using rule 28 (tipo_simple -> FLOAT64 .)
+    RPAREN          reduce using rule 28 (tipo_simple -> FLOAT64 .)
+    LBRACKET        reduce using rule 28 (tipo_simple -> FLOAT64 .)
+
+
+state 37
+
+    (29) tipo_simple -> BOOL .
+
+    EQUAL           reduce using rule 29 (tipo_simple -> BOOL .)
+    SEMICOLON       reduce using rule 29 (tipo_simple -> BOOL .)
+    RDIAMOND        reduce using rule 29 (tipo_simple -> BOOL .)
+    COMMA           reduce using rule 29 (tipo_simple -> BOOL .)
+    RBRACKET        reduce using rule 29 (tipo_simple -> BOOL .)
+    RPAREN          reduce using rule 29 (tipo_simple -> BOOL .)
+    LBRACKET        reduce using rule 29 (tipo_simple -> BOOL .)
+
+
+state 38
+
+    (30) tipo_simple -> CHAR .
+
+    EQUAL           reduce using rule 30 (tipo_simple -> CHAR .)
+    SEMICOLON       reduce using rule 30 (tipo_simple -> CHAR .)
+    RDIAMOND        reduce using rule 30 (tipo_simple -> CHAR .)
+    COMMA           reduce using rule 30 (tipo_simple -> CHAR .)
+    RBRACKET        reduce using rule 30 (tipo_simple -> CHAR .)
+    RPAREN          reduce using rule 30 (tipo_simple -> CHAR .)
+    LBRACKET        reduce using rule 30 (tipo_simple -> CHAR .)
+
+
+state 39
+
+    (31) tipo_simple -> STR .
+
+    EQUAL           reduce using rule 31 (tipo_simple -> STR .)
+    SEMICOLON       reduce using rule 31 (tipo_simple -> STR .)
+    RDIAMOND        reduce using rule 31 (tipo_simple -> STR .)
+    COMMA           reduce using rule 31 (tipo_simple -> STR .)
+    RBRACKET        reduce using rule 31 (tipo_simple -> STR .)
+    RPAREN          reduce using rule 31 (tipo_simple -> STR .)
+    LBRACKET        reduce using rule 31 (tipo_simple -> STR .)
+
+
+state 40
+
+    (56) expresion_variable -> VARIABLE .
+    (57) expresion_funcion -> VARIABLE . LPAREN argumentos RPAREN SEMICOLON
+
+    SEMICOLON       reduce using rule 56 (expresion_variable -> VARIABLE .)
+    RPAREN          reduce using rule 56 (expresion_variable -> VARIABLE .)
+    COMMA           reduce using rule 56 (expresion_variable -> VARIABLE .)
+    LPAREN          shift and go to state 63
+
+
+state 41
+
+    (11) declaracion_variable -> LET VARIABLE EQUAL expresion . SEMICOLON
+
+    SEMICOLON       shift and go to state 64
+
+
+state 42
+
+    (47) expresion -> expresion_literal .
+
+    SEMICOLON       reduce using rule 47 (expresion -> expresion_literal .)
+    RPAREN          reduce using rule 47 (expresion -> expresion_literal .)
+    COMMA           reduce using rule 47 (expresion -> expresion_literal .)
+
+
+state 43
+
+    (48) expresion -> expresion_variable .
+
+    SEMICOLON       reduce using rule 48 (expresion -> expresion_variable .)
+    RPAREN          reduce using rule 48 (expresion -> expresion_variable .)
+    COMMA           reduce using rule 48 (expresion -> expresion_variable .)
+
+
+state 44
+
+    (49) expresion -> expresion_funcion .
+
+    SEMICOLON       reduce using rule 49 (expresion -> expresion_funcion .)
+    RPAREN          reduce using rule 49 (expresion -> expresion_funcion .)
+    COMMA           reduce using rule 49 (expresion -> expresion_funcion .)
+
+
+state 45
+
+    (50) expresion -> expresion_estructura .
+
+    SEMICOLON       reduce using rule 50 (expresion -> expresion_estructura .)
+    RPAREN          reduce using rule 50 (expresion -> expresion_estructura .)
+    COMMA           reduce using rule 50 (expresion -> expresion_estructura .)
+
+
+state 46
+
+    (51) expresion_literal -> literal .
+
+    SEMICOLON       reduce using rule 51 (expresion_literal -> literal .)
+    RPAREN          reduce using rule 51 (expresion_literal -> literal .)
+    COMMA           reduce using rule 51 (expresion_literal -> literal .)
+
+
+state 47
+
+    (58) expresion_estructura -> hashmap .
+
+    SEMICOLON       reduce using rule 58 (expresion_estructura -> hashmap .)
+    RPAREN          reduce using rule 58 (expresion_estructura -> hashmap .)
+    COMMA           reduce using rule 58 (expresion_estructura -> hashmap .)
+
+
+state 48
+
+    (52) literal -> NUMBER .
+
+    SEMICOLON       reduce using rule 52 (literal -> NUMBER .)
+    RPAREN          reduce using rule 52 (literal -> NUMBER .)
+    COMMA           reduce using rule 52 (literal -> NUMBER .)
+
+
+state 49
+
+    (53) literal -> STRING .
+
+    SEMICOLON       reduce using rule 53 (literal -> STRING .)
+    RPAREN          reduce using rule 53 (literal -> STRING .)
+    COMMA           reduce using rule 53 (literal -> STRING .)
+
+
+state 50
+
+    (54) literal -> TRUE .
+
+    SEMICOLON       reduce using rule 54 (literal -> TRUE .)
+    RPAREN          reduce using rule 54 (literal -> TRUE .)
+    COMMA           reduce using rule 54 (literal -> TRUE .)
+
+
+state 51
+
+    (55) literal -> FALSE .
+
+    SEMICOLON       reduce using rule 55 (literal -> FALSE .)
+    RPAREN          reduce using rule 55 (literal -> FALSE .)
+    COMMA           reduce using rule 55 (literal -> FALSE .)
+
+
+state 52
+
+    (59) hashmap -> LDIAMOND . hashmap_types RDIAMOND
+    (60) hashmap_types -> . hashmap_types COMMA hashmap_type
+    (61) hashmap_types -> . hashmap_type
+    (62) hashmap_type -> . tipo
+    (18) tipo -> . tipo_simple
+    (19) tipo_simple -> . INT8
+    (20) tipo_simple -> . INT16
+    (21) tipo_simple -> . INT32
+    (22) tipo_simple -> . INT64
+    (23) tipo_simple -> . UINT8
+    (24) tipo_simple -> . UINT16
+    (25) tipo_simple -> . UINT32
+    (26) tipo_simple -> . UINT64
+    (27) tipo_simple -> . FLOAT32
+    (28) tipo_simple -> . FLOAT64
+    (29) tipo_simple -> . BOOL
+    (30) tipo_simple -> . CHAR
+    (31) tipo_simple -> . STR
+
+    INT8            shift and go to state 27
+    INT16           shift and go to state 28
+    INT32           shift and go to state 29
+    INT64           shift and go to state 30
+    UINT8           shift and go to state 31
+    UINT16          shift and go to state 32
+    UINT32          shift and go to state 33
+    UINT64          shift and go to state 34
+    FLOAT32         shift and go to state 35
+    FLOAT64         shift and go to state 36
+    BOOL            shift and go to state 37
+    CHAR            shift and go to state 38
+    STR             shift and go to state 39
+
+    hashmap_types                  shift and go to state 65
+    hashmap_type                   shift and go to state 66
+    tipo                           shift and go to state 67
+    tipo_simple                    shift and go to state 26
+
+state 53
+
+    (17) campo -> VARIABLE . DOUBLE_POINT tipo
+
+    DOUBLE_POINT    shift and go to state 68
+
+
+state 54
+
+    (13) declaracion_estructura -> STRUCT VARIABLE LBRACKET campos . RBRACKET SEMICOLON
+    (15) campos -> campos . COMMA campo
+
+    RBRACKET        shift and go to state 69
+    COMMA           shift and go to state 70
+
+
+state 55
+
+    (14) declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 71
+
+
+state 56
+
+    (16) campos -> campo .
+
+    RBRACKET        reduce using rule 16 (campos -> campo .)
+    COMMA           reduce using rule 16 (campos -> campo .)
+
+
+state 57
+
+    (39) parametro -> VARIABLE . DOUBLE_POINT tipo
+
+    DOUBLE_POINT    shift and go to state 72
+
+
+state 58
+
+    (34) funcion_generica -> FN VARIABLE LPAREN parametros . RPAREN ARROW tipo_simple bloque
+    (35) parametros -> parametros . COMMA parametro
+
+    RPAREN          shift and go to state 73
+    COMMA           shift and go to state 74
+
+
+state 59
+
+    (36) parametros -> parametro .
+
+    RPAREN          reduce using rule 36 (parametros -> parametro .)
+    COMMA           reduce using rule 36 (parametros -> parametro .)
+
+
+state 60
+
+    (37) parametros -> empty .
+
+    RPAREN          reduce using rule 37 (parametros -> empty .)
+    COMMA           reduce using rule 37 (parametros -> empty .)
+
+
+state 61
+
+    (9) declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL . expresion SEMICOLON
+    (47) expresion -> . expresion_literal
+    (48) expresion -> . expresion_variable
+    (49) expresion -> . expresion_funcion
+    (50) expresion -> . expresion_estructura
+    (51) expresion_literal -> . literal
+    (56) expresion_variable -> . VARIABLE
+    (57) expresion_funcion -> . VARIABLE LPAREN argumentos RPAREN SEMICOLON
+    (58) expresion_estructura -> . hashmap
+    (52) literal -> . NUMBER
+    (53) literal -> . STRING
+    (54) literal -> . TRUE
+    (55) literal -> . FALSE
+    (59) hashmap -> . LDIAMOND hashmap_types RDIAMOND
+
+    VARIABLE        shift and go to state 40
+    NUMBER          shift and go to state 48
+    STRING          shift and go to state 49
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
+    LDIAMOND        shift and go to state 52
+
+    expresion                      shift and go to state 75
+    expresion_literal              shift and go to state 42
+    expresion_variable             shift and go to state 43
+    expresion_funcion              shift and go to state 44
+    expresion_estructura           shift and go to state 45
+    literal                        shift and go to state 46
+    hashmap                        shift and go to state 47
+
+state 62
+
+    (10) declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .
+
+    error           reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    USE             reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    LET             reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    STRUCT          reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    FN              reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    $end            reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    RBRACKET        reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    VARIABLE        reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    NUMBER          reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    STRING          reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    TRUE            reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    FALSE           reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+    LDIAMOND        reduce using rule 10 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo SEMICOLON .)
+
+
+state 63
+
+    (57) expresion_funcion -> VARIABLE LPAREN . argumentos RPAREN SEMICOLON
+    (63) argumentos -> . argumentos COMMA argumento
+    (64) argumentos -> . argumento
+    (65) argumentos -> . empty
+    (66) argumento -> . expresion
+    (38) empty -> .
+    (47) expresion -> . expresion_literal
+    (48) expresion -> . expresion_variable
+    (49) expresion -> . expresion_funcion
+    (50) expresion -> . expresion_estructura
+    (51) expresion_literal -> . literal
+    (56) expresion_variable -> . VARIABLE
+    (57) expresion_funcion -> . VARIABLE LPAREN argumentos RPAREN SEMICOLON
+    (58) expresion_estructura -> . hashmap
+    (52) literal -> . NUMBER
+    (53) literal -> . STRING
+    (54) literal -> . TRUE
+    (55) literal -> . FALSE
+    (59) hashmap -> . LDIAMOND hashmap_types RDIAMOND
+
+    RPAREN          reduce using rule 38 (empty -> .)
+    COMMA           reduce using rule 38 (empty -> .)
+    VARIABLE        shift and go to state 40
+    NUMBER          shift and go to state 48
+    STRING          shift and go to state 49
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
+    LDIAMOND        shift and go to state 52
+
+    argumentos                     shift and go to state 76
+    argumento                      shift and go to state 77
+    empty                          shift and go to state 78
+    expresion                      shift and go to state 79
+    expresion_literal              shift and go to state 42
+    expresion_variable             shift and go to state 43
+    expresion_funcion              shift and go to state 44
+    expresion_estructura           shift and go to state 45
+    literal                        shift and go to state 46
+    hashmap                        shift and go to state 47
+
+state 64
+
+    (11) declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .
+
+    error           reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    USE             reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    LET             reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    STRUCT          reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    FN              reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    $end            reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    RBRACKET        reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    VARIABLE        reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    NUMBER          reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    STRING          reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    TRUE            reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    FALSE           reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+    LDIAMOND        reduce using rule 11 (declaracion_variable -> LET VARIABLE EQUAL expresion SEMICOLON .)
+
+
+state 65
+
+    (59) hashmap -> LDIAMOND hashmap_types . RDIAMOND
+    (60) hashmap_types -> hashmap_types . COMMA hashmap_type
+
+    RDIAMOND        shift and go to state 80
+    COMMA           shift and go to state 81
+
+
+state 66
+
+    (61) hashmap_types -> hashmap_type .
+
+    RDIAMOND        reduce using rule 61 (hashmap_types -> hashmap_type .)
+    COMMA           reduce using rule 61 (hashmap_types -> hashmap_type .)
+
+
+state 67
+
+    (62) hashmap_type -> tipo .
+
+    RDIAMOND        reduce using rule 62 (hashmap_type -> tipo .)
+    COMMA           reduce using rule 62 (hashmap_type -> tipo .)
+
+
+state 68
+
+    (17) campo -> VARIABLE DOUBLE_POINT . tipo
+    (18) tipo -> . tipo_simple
+    (19) tipo_simple -> . INT8
+    (20) tipo_simple -> . INT16
+    (21) tipo_simple -> . INT32
+    (22) tipo_simple -> . INT64
+    (23) tipo_simple -> . UINT8
+    (24) tipo_simple -> . UINT16
+    (25) tipo_simple -> . UINT32
+    (26) tipo_simple -> . UINT64
+    (27) tipo_simple -> . FLOAT32
+    (28) tipo_simple -> . FLOAT64
+    (29) tipo_simple -> . BOOL
+    (30) tipo_simple -> . CHAR
+    (31) tipo_simple -> . STR
+
+    INT8            shift and go to state 27
+    INT16           shift and go to state 28
+    INT32           shift and go to state 29
+    INT64           shift and go to state 30
+    UINT8           shift and go to state 31
+    UINT16          shift and go to state 32
+    UINT32          shift and go to state 33
+    UINT64          shift and go to state 34
+    FLOAT32         shift and go to state 35
+    FLOAT64         shift and go to state 36
+    BOOL            shift and go to state 37
+    CHAR            shift and go to state 38
+    STR             shift and go to state 39
+
+    tipo                           shift and go to state 82
+    tipo_simple                    shift and go to state 26
+
+state 69
+
+    (13) declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 83
+
+
+state 70
+
+    (15) campos -> campos COMMA . campo
+    (17) campo -> . VARIABLE DOUBLE_POINT tipo
+
+    VARIABLE        shift and go to state 53
+
+    campo                          shift and go to state 84
+
+state 71
+
+    (14) declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .
+
+    error           reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    USE             reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    LET             reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    STRUCT          reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    FN              reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    $end            reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    RBRACKET        reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    VARIABLE        reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    NUMBER          reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    STRING          reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    TRUE            reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    FALSE           reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+    LDIAMOND        reduce using rule 14 (declaracion_estructura -> STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON .)
+
+
+state 72
+
+    (39) parametro -> VARIABLE DOUBLE_POINT . tipo
+    (18) tipo -> . tipo_simple
+    (19) tipo_simple -> . INT8
+    (20) tipo_simple -> . INT16
+    (21) tipo_simple -> . INT32
+    (22) tipo_simple -> . INT64
+    (23) tipo_simple -> . UINT8
+    (24) tipo_simple -> . UINT16
+    (25) tipo_simple -> . UINT32
+    (26) tipo_simple -> . UINT64
+    (27) tipo_simple -> . FLOAT32
+    (28) tipo_simple -> . FLOAT64
+    (29) tipo_simple -> . BOOL
+    (30) tipo_simple -> . CHAR
+    (31) tipo_simple -> . STR
+
+    INT8            shift and go to state 27
+    INT16           shift and go to state 28
+    INT32           shift and go to state 29
+    INT64           shift and go to state 30
+    UINT8           shift and go to state 31
+    UINT16          shift and go to state 32
+    UINT32          shift and go to state 33
+    UINT64          shift and go to state 34
+    FLOAT32         shift and go to state 35
+    FLOAT64         shift and go to state 36
+    BOOL            shift and go to state 37
+    CHAR            shift and go to state 38
+    STR             shift and go to state 39
+
+    tipo                           shift and go to state 85
+    tipo_simple                    shift and go to state 26
+
+state 73
+
+    (34) funcion_generica -> FN VARIABLE LPAREN parametros RPAREN . ARROW tipo_simple bloque
+
+    ARROW           shift and go to state 86
+
+
+state 74
+
+    (35) parametros -> parametros COMMA . parametro
+    (39) parametro -> . VARIABLE DOUBLE_POINT tipo
+
+    VARIABLE        shift and go to state 57
+
+    parametro                      shift and go to state 87
+
+state 75
+
+    (9) declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion . SEMICOLON
+
+    SEMICOLON       shift and go to state 88
+
+
+state 76
+
+    (57) expresion_funcion -> VARIABLE LPAREN argumentos . RPAREN SEMICOLON
+    (63) argumentos -> argumentos . COMMA argumento
+
+    RPAREN          shift and go to state 89
+    COMMA           shift and go to state 90
+
+
+state 77
+
+    (64) argumentos -> argumento .
+
+    RPAREN          reduce using rule 64 (argumentos -> argumento .)
+    COMMA           reduce using rule 64 (argumentos -> argumento .)
+
+
+state 78
+
+    (65) argumentos -> empty .
+
+    RPAREN          reduce using rule 65 (argumentos -> empty .)
+    COMMA           reduce using rule 65 (argumentos -> empty .)
+
+
+state 79
+
+    (66) argumento -> expresion .
+
+    RPAREN          reduce using rule 66 (argumento -> expresion .)
+    COMMA           reduce using rule 66 (argumento -> expresion .)
+
+
+state 80
+
+    (59) hashmap -> LDIAMOND hashmap_types RDIAMOND .
+
+    SEMICOLON       reduce using rule 59 (hashmap -> LDIAMOND hashmap_types RDIAMOND .)
+    RPAREN          reduce using rule 59 (hashmap -> LDIAMOND hashmap_types RDIAMOND .)
+    COMMA           reduce using rule 59 (hashmap -> LDIAMOND hashmap_types RDIAMOND .)
+
+
+state 81
+
+    (60) hashmap_types -> hashmap_types COMMA . hashmap_type
+    (62) hashmap_type -> . tipo
+    (18) tipo -> . tipo_simple
+    (19) tipo_simple -> . INT8
+    (20) tipo_simple -> . INT16
+    (21) tipo_simple -> . INT32
+    (22) tipo_simple -> . INT64
+    (23) tipo_simple -> . UINT8
+    (24) tipo_simple -> . UINT16
+    (25) tipo_simple -> . UINT32
+    (26) tipo_simple -> . UINT64
+    (27) tipo_simple -> . FLOAT32
+    (28) tipo_simple -> . FLOAT64
+    (29) tipo_simple -> . BOOL
+    (30) tipo_simple -> . CHAR
+    (31) tipo_simple -> . STR
+
+    INT8            shift and go to state 27
+    INT16           shift and go to state 28
+    INT32           shift and go to state 29
+    INT64           shift and go to state 30
+    UINT8           shift and go to state 31
+    UINT16          shift and go to state 32
+    UINT32          shift and go to state 33
+    UINT64          shift and go to state 34
+    FLOAT32         shift and go to state 35
+    FLOAT64         shift and go to state 36
+    BOOL            shift and go to state 37
+    CHAR            shift and go to state 38
+    STR             shift and go to state 39
+
+    hashmap_type                   shift and go to state 91
+    tipo                           shift and go to state 67
+    tipo_simple                    shift and go to state 26
+
+state 82
+
+    (17) campo -> VARIABLE DOUBLE_POINT tipo .
+
+    RBRACKET        reduce using rule 17 (campo -> VARIABLE DOUBLE_POINT tipo .)
+    COMMA           reduce using rule 17 (campo -> VARIABLE DOUBLE_POINT tipo .)
+
+
+state 83
+
+    (13) declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .
+
+    error           reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    USE             reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    LET             reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    STRUCT          reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    FN              reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    $end            reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    RBRACKET        reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    VARIABLE        reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    NUMBER          reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    STRING          reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    TRUE            reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    FALSE           reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+    LDIAMOND        reduce using rule 13 (declaracion_estructura -> STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON .)
+
+
+state 84
+
+    (15) campos -> campos COMMA campo .
+
+    RBRACKET        reduce using rule 15 (campos -> campos COMMA campo .)
+    COMMA           reduce using rule 15 (campos -> campos COMMA campo .)
+
+
+state 85
+
+    (39) parametro -> VARIABLE DOUBLE_POINT tipo .
+
+    RPAREN          reduce using rule 39 (parametro -> VARIABLE DOUBLE_POINT tipo .)
+    COMMA           reduce using rule 39 (parametro -> VARIABLE DOUBLE_POINT tipo .)
+
+
+state 86
+
+    (34) funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW . tipo_simple bloque
+    (19) tipo_simple -> . INT8
+    (20) tipo_simple -> . INT16
+    (21) tipo_simple -> . INT32
+    (22) tipo_simple -> . INT64
+    (23) tipo_simple -> . UINT8
+    (24) tipo_simple -> . UINT16
+    (25) tipo_simple -> . UINT32
+    (26) tipo_simple -> . UINT64
+    (27) tipo_simple -> . FLOAT32
+    (28) tipo_simple -> . FLOAT64
+    (29) tipo_simple -> . BOOL
+    (30) tipo_simple -> . CHAR
+    (31) tipo_simple -> . STR
+
+    INT8            shift and go to state 27
+    INT16           shift and go to state 28
+    INT32           shift and go to state 29
+    INT64           shift and go to state 30
+    UINT8           shift and go to state 31
+    UINT16          shift and go to state 32
+    UINT32          shift and go to state 33
+    UINT64          shift and go to state 34
+    FLOAT32         shift and go to state 35
+    FLOAT64         shift and go to state 36
+    BOOL            shift and go to state 37
+    CHAR            shift and go to state 38
+    STR             shift and go to state 39
+
+    tipo_simple                    shift and go to state 92
+
+state 87
+
+    (35) parametros -> parametros COMMA parametro .
+
+    RPAREN          reduce using rule 35 (parametros -> parametros COMMA parametro .)
+    COMMA           reduce using rule 35 (parametros -> parametros COMMA parametro .)
+
+
+state 88
+
+    (9) declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .
+
+    error           reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    USE             reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    LET             reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    STRUCT          reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    FN              reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    $end            reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    RBRACKET        reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    VARIABLE        reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    NUMBER          reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    STRING          reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    TRUE            reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    FALSE           reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+    LDIAMOND        reduce using rule 9 (declaracion_variable -> LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON .)
+
+
+state 89
+
+    (57) expresion_funcion -> VARIABLE LPAREN argumentos RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 93
+
+
+state 90
+
+    (63) argumentos -> argumentos COMMA . argumento
+    (66) argumento -> . expresion
+    (47) expresion -> . expresion_literal
+    (48) expresion -> . expresion_variable
+    (49) expresion -> . expresion_funcion
+    (50) expresion -> . expresion_estructura
+    (51) expresion_literal -> . literal
+    (56) expresion_variable -> . VARIABLE
+    (57) expresion_funcion -> . VARIABLE LPAREN argumentos RPAREN SEMICOLON
+    (58) expresion_estructura -> . hashmap
+    (52) literal -> . NUMBER
+    (53) literal -> . STRING
+    (54) literal -> . TRUE
+    (55) literal -> . FALSE
+    (59) hashmap -> . LDIAMOND hashmap_types RDIAMOND
+
+    VARIABLE        shift and go to state 40
+    NUMBER          shift and go to state 48
+    STRING          shift and go to state 49
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
+    LDIAMOND        shift and go to state 52
+
+    argumento                      shift and go to state 94
+    expresion                      shift and go to state 79
+    expresion_literal              shift and go to state 42
+    expresion_variable             shift and go to state 43
+    expresion_funcion              shift and go to state 44
+    expresion_estructura           shift and go to state 45
+    literal                        shift and go to state 46
+    hashmap                        shift and go to state 47
+
+state 91
+
+    (60) hashmap_types -> hashmap_types COMMA hashmap_type .
+
+    RDIAMOND        reduce using rule 60 (hashmap_types -> hashmap_types COMMA hashmap_type .)
+    COMMA           reduce using rule 60 (hashmap_types -> hashmap_types COMMA hashmap_type .)
+
+
+state 92
+
+    (34) funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple . bloque
+    (40) bloque -> . LBRACKET sentencias RBRACKET
+
+    LBRACKET        shift and go to state 96
+
+    bloque                         shift and go to state 95
+
+state 93
+
+    (57) expresion_funcion -> VARIABLE LPAREN argumentos RPAREN SEMICOLON .
+
+    SEMICOLON       reduce using rule 57 (expresion_funcion -> VARIABLE LPAREN argumentos RPAREN SEMICOLON .)
+    RPAREN          reduce using rule 57 (expresion_funcion -> VARIABLE LPAREN argumentos RPAREN SEMICOLON .)
+    COMMA           reduce using rule 57 (expresion_funcion -> VARIABLE LPAREN argumentos RPAREN SEMICOLON .)
+
+
+state 94
+
+    (63) argumentos -> argumentos COMMA argumento .
+
+    RPAREN          reduce using rule 63 (argumentos -> argumentos COMMA argumento .)
+    COMMA           reduce using rule 63 (argumentos -> argumentos COMMA argumento .)
+
+
+state 95
+
+    (34) funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque .
+
+    error           reduce using rule 34 (funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque .)
+    USE             reduce using rule 34 (funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque .)
+    LET             reduce using rule 34 (funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque .)
+    STRUCT          reduce using rule 34 (funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque .)
+    FN              reduce using rule 34 (funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque .)
+    $end            reduce using rule 34 (funcion_generica -> FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque .)
+
+
+state 96
+
+    (40) bloque -> LBRACKET . sentencias RBRACKET
+    (41) sentencias -> . sentencias sentencia
+    (42) sentencias -> . sentencia
+    (43) sentencia -> . expresion SEMICOLON
+    (44) sentencia -> . declaracion
+    (45) sentencia -> . asignacion
+    (47) expresion -> . expresion_literal
+    (48) expresion -> . expresion_variable
+    (49) expresion -> . expresion_funcion
+    (50) expresion -> . expresion_estructura
+    (7) declaracion -> . declaracion_variable
+    (8) declaracion -> . declaracion_estructura
+    (46) asignacion -> . VARIABLE EQUAL expresion SEMICOLON
+    (51) expresion_literal -> . literal
+    (56) expresion_variable -> . VARIABLE
+    (57) expresion_funcion -> . VARIABLE LPAREN argumentos RPAREN SEMICOLON
+    (58) expresion_estructura -> . hashmap
+    (9) declaracion_variable -> . LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+    (10) declaracion_variable -> . LET VARIABLE DOUBLE_POINT tipo SEMICOLON
+    (11) declaracion_variable -> . LET VARIABLE EQUAL expresion SEMICOLON
+    (12) declaracion_variable -> . LET VARIABLE SEMICOLON
+    (13) declaracion_estructura -> . STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON
+    (14) declaracion_estructura -> . STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON
+    (52) literal -> . NUMBER
+    (53) literal -> . STRING
+    (54) literal -> . TRUE
+    (55) literal -> . FALSE
+    (59) hashmap -> . LDIAMOND hashmap_types RDIAMOND
+
+    VARIABLE        shift and go to state 102
+    LET             shift and go to state 11
+    STRUCT          shift and go to state 12
+    NUMBER          shift and go to state 48
+    STRING          shift and go to state 49
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
+    LDIAMOND        shift and go to state 52
+
+    sentencias                     shift and go to state 97
+    sentencia                      shift and go to state 98
+    expresion                      shift and go to state 99
+    declaracion                    shift and go to state 100
+    asignacion                     shift and go to state 101
+    expresion_literal              shift and go to state 42
+    expresion_variable             shift and go to state 43
+    expresion_funcion              shift and go to state 44
+    expresion_estructura           shift and go to state 45
+    declaracion_variable           shift and go to state 7
+    declaracion_estructura         shift and go to state 8
+    literal                        shift and go to state 46
+    hashmap                        shift and go to state 47
+
+state 97
+
+    (40) bloque -> LBRACKET sentencias . RBRACKET
+    (41) sentencias -> sentencias . sentencia
+    (43) sentencia -> . expresion SEMICOLON
+    (44) sentencia -> . declaracion
+    (45) sentencia -> . asignacion
+    (47) expresion -> . expresion_literal
+    (48) expresion -> . expresion_variable
+    (49) expresion -> . expresion_funcion
+    (50) expresion -> . expresion_estructura
+    (7) declaracion -> . declaracion_variable
+    (8) declaracion -> . declaracion_estructura
+    (46) asignacion -> . VARIABLE EQUAL expresion SEMICOLON
+    (51) expresion_literal -> . literal
+    (56) expresion_variable -> . VARIABLE
+    (57) expresion_funcion -> . VARIABLE LPAREN argumentos RPAREN SEMICOLON
+    (58) expresion_estructura -> . hashmap
+    (9) declaracion_variable -> . LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+    (10) declaracion_variable -> . LET VARIABLE DOUBLE_POINT tipo SEMICOLON
+    (11) declaracion_variable -> . LET VARIABLE EQUAL expresion SEMICOLON
+    (12) declaracion_variable -> . LET VARIABLE SEMICOLON
+    (13) declaracion_estructura -> . STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON
+    (14) declaracion_estructura -> . STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON
+    (52) literal -> . NUMBER
+    (53) literal -> . STRING
+    (54) literal -> . TRUE
+    (55) literal -> . FALSE
+    (59) hashmap -> . LDIAMOND hashmap_types RDIAMOND
+
+    RBRACKET        shift and go to state 103
+    VARIABLE        shift and go to state 102
+    LET             shift and go to state 11
+    STRUCT          shift and go to state 12
+    NUMBER          shift and go to state 48
+    STRING          shift and go to state 49
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
+    LDIAMOND        shift and go to state 52
+
+    sentencia                      shift and go to state 104
+    expresion                      shift and go to state 99
+    declaracion                    shift and go to state 100
+    asignacion                     shift and go to state 101
+    expresion_literal              shift and go to state 42
+    expresion_variable             shift and go to state 43
+    expresion_funcion              shift and go to state 44
+    expresion_estructura           shift and go to state 45
+    declaracion_variable           shift and go to state 7
+    declaracion_estructura         shift and go to state 8
+    literal                        shift and go to state 46
+    hashmap                        shift and go to state 47
+
+state 98
+
+    (42) sentencias -> sentencia .
+
+    RBRACKET        reduce using rule 42 (sentencias -> sentencia .)
+    VARIABLE        reduce using rule 42 (sentencias -> sentencia .)
+    LET             reduce using rule 42 (sentencias -> sentencia .)
+    STRUCT          reduce using rule 42 (sentencias -> sentencia .)
+    NUMBER          reduce using rule 42 (sentencias -> sentencia .)
+    STRING          reduce using rule 42 (sentencias -> sentencia .)
+    TRUE            reduce using rule 42 (sentencias -> sentencia .)
+    FALSE           reduce using rule 42 (sentencias -> sentencia .)
+    LDIAMOND        reduce using rule 42 (sentencias -> sentencia .)
+
+
+state 99
+
+    (43) sentencia -> expresion . SEMICOLON
+
+    SEMICOLON       shift and go to state 105
+
+
+state 100
+
+    (44) sentencia -> declaracion .
+
+    RBRACKET        reduce using rule 44 (sentencia -> declaracion .)
+    VARIABLE        reduce using rule 44 (sentencia -> declaracion .)
+    LET             reduce using rule 44 (sentencia -> declaracion .)
+    STRUCT          reduce using rule 44 (sentencia -> declaracion .)
+    NUMBER          reduce using rule 44 (sentencia -> declaracion .)
+    STRING          reduce using rule 44 (sentencia -> declaracion .)
+    TRUE            reduce using rule 44 (sentencia -> declaracion .)
+    FALSE           reduce using rule 44 (sentencia -> declaracion .)
+    LDIAMOND        reduce using rule 44 (sentencia -> declaracion .)
+
+
+state 101
+
+    (45) sentencia -> asignacion .
+
+    RBRACKET        reduce using rule 45 (sentencia -> asignacion .)
+    VARIABLE        reduce using rule 45 (sentencia -> asignacion .)
+    LET             reduce using rule 45 (sentencia -> asignacion .)
+    STRUCT          reduce using rule 45 (sentencia -> asignacion .)
+    NUMBER          reduce using rule 45 (sentencia -> asignacion .)
+    STRING          reduce using rule 45 (sentencia -> asignacion .)
+    TRUE            reduce using rule 45 (sentencia -> asignacion .)
+    FALSE           reduce using rule 45 (sentencia -> asignacion .)
+    LDIAMOND        reduce using rule 45 (sentencia -> asignacion .)
+
+
+state 102
+
+    (46) asignacion -> VARIABLE . EQUAL expresion SEMICOLON
+    (56) expresion_variable -> VARIABLE .
+    (57) expresion_funcion -> VARIABLE . LPAREN argumentos RPAREN SEMICOLON
+
+    EQUAL           shift and go to state 106
+    SEMICOLON       reduce using rule 56 (expresion_variable -> VARIABLE .)
+    LPAREN          shift and go to state 63
+
+
+state 103
+
+    (40) bloque -> LBRACKET sentencias RBRACKET .
+
+    error           reduce using rule 40 (bloque -> LBRACKET sentencias RBRACKET .)
+    USE             reduce using rule 40 (bloque -> LBRACKET sentencias RBRACKET .)
+    LET             reduce using rule 40 (bloque -> LBRACKET sentencias RBRACKET .)
+    STRUCT          reduce using rule 40 (bloque -> LBRACKET sentencias RBRACKET .)
+    FN              reduce using rule 40 (bloque -> LBRACKET sentencias RBRACKET .)
+    $end            reduce using rule 40 (bloque -> LBRACKET sentencias RBRACKET .)
+
+
+state 104
+
+    (41) sentencias -> sentencias sentencia .
+
+    RBRACKET        reduce using rule 41 (sentencias -> sentencias sentencia .)
+    VARIABLE        reduce using rule 41 (sentencias -> sentencias sentencia .)
+    LET             reduce using rule 41 (sentencias -> sentencias sentencia .)
+    STRUCT          reduce using rule 41 (sentencias -> sentencias sentencia .)
+    NUMBER          reduce using rule 41 (sentencias -> sentencias sentencia .)
+    STRING          reduce using rule 41 (sentencias -> sentencias sentencia .)
+    TRUE            reduce using rule 41 (sentencias -> sentencias sentencia .)
+    FALSE           reduce using rule 41 (sentencias -> sentencias sentencia .)
+    LDIAMOND        reduce using rule 41 (sentencias -> sentencias sentencia .)
+
+
+state 105
+
+    (43) sentencia -> expresion SEMICOLON .
+
+    RBRACKET        reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+    VARIABLE        reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+    LET             reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+    STRUCT          reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+    NUMBER          reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+    STRING          reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+    TRUE            reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+    FALSE           reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+    LDIAMOND        reduce using rule 43 (sentencia -> expresion SEMICOLON .)
+
+
+state 106
+
+    (46) asignacion -> VARIABLE EQUAL . expresion SEMICOLON
+    (47) expresion -> . expresion_literal
+    (48) expresion -> . expresion_variable
+    (49) expresion -> . expresion_funcion
+    (50) expresion -> . expresion_estructura
+    (51) expresion_literal -> . literal
+    (56) expresion_variable -> . VARIABLE
+    (57) expresion_funcion -> . VARIABLE LPAREN argumentos RPAREN SEMICOLON
+    (58) expresion_estructura -> . hashmap
+    (52) literal -> . NUMBER
+    (53) literal -> . STRING
+    (54) literal -> . TRUE
+    (55) literal -> . FALSE
+    (59) hashmap -> . LDIAMOND hashmap_types RDIAMOND
+
+    VARIABLE        shift and go to state 40
+    NUMBER          shift and go to state 48
+    STRING          shift and go to state 49
+    TRUE            shift and go to state 50
+    FALSE           shift and go to state 51
+    LDIAMOND        shift and go to state 52
+
+    expresion                      shift and go to state 107
+    expresion_literal              shift and go to state 42
+    expresion_variable             shift and go to state 43
+    expresion_funcion              shift and go to state 44
+    expresion_estructura           shift and go to state 45
+    literal                        shift and go to state 46
+    hashmap                        shift and go to state 47
+
+state 107
+
+    (46) asignacion -> VARIABLE EQUAL expresion . SEMICOLON
+
+    SEMICOLON       shift and go to state 108
+
+
+state 108
+
+    (46) asignacion -> VARIABLE EQUAL expresion SEMICOLON .
+
+    RBRACKET        reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+    VARIABLE        reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+    LET             reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+    STRUCT          reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+    NUMBER          reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+    STRING          reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+    TRUE            reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+    FALSE           reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+    LDIAMOND        reduce using rule 46 (asignacion -> VARIABLE EQUAL expresion SEMICOLON .)
+
