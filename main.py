@@ -39,45 +39,43 @@ reserved = {
 
 # Sequencia de tokens, puede ser lista o tupla
 tokens = ('NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN',
-          'LLLAVE', 'RLLAVE', 'VARIABLE', 'CADENA', 'PUNTOYCOMA',
-          'EXCLAMACION', 'IGUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET', 'DOUBLE_POINT', 'POINT', 'PERCENTAGE', 'AND', 'OR', 'BITAND' , 'BITOR', 'BITXOR'
-          'L_DIAMOND', 'R_DIAMOND', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW',
-          'AMPERSAND') + tuple(reserved.values())
+          'LBRACKET', 'RBRACKET', 'VARIABLE', 'STRING', 'SEMICOLON',
+          'EXCLAMATION', 'EQUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET', 'DOUBLE_POINT', 'POINT', 'PERCENTAGE', 'AND', 'OR', 'BITAND' , 'BITOR', 'BITXOR',
+          'LDIAMOND', 'RDIAMOND', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW') + tuple(reserved.values())
 
 # Exp Regulares para tokens de símbolos
 # Xavier Magallanes
 t_PLUS = r'\+'
-t_MINUS = r'-'
+t_MINUS = r'\-'
 t_COMMA = r'\,'
 t_TIMES = r'\*'
-t_DIVIDE = r'/'
+t_DIVIDE = r'\/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_LLLAVE = r'\{'
-t_RLLAVE = r'\}'
+t_LBRACKET = r'\{'
+t_RBRACKET = r'\}'
 t_NUMBER = r'\d+'
-t_PUNTOYCOMA = r'\;'
-t_EXCLAMACION = r'\!'
-t_IGUAL = r'\='
+t_SEMICOLON = r'\;'
+t_EXCLAMATION = r'\!'
+t_EQUAL = r'\='
 # Fausto Jacome
 t_L_BRACKET = r'\['
 t_R_BRACKET = r'\]'
 t_DOUBLE_POINT = r'\:'
 t_POINT = r'\.'
 t_PERCENTAGE = r'\%'
-t_AND = r'\&&'
+t_AND = r'\&\&'
 t_OR = r'\|\|'
 t_BITAND = r'\&'
 t_BITOR = r'\|'
 t_BITXOR = r'\^'
 # Donoso Bravo Luis Alejandro
-t_L_DIAMOND = r'\<'
-t_R_DIAMOND = r'\>'
+t_LDIAMOND = r'\<'
+t_RDIAMOND = r'\>'
 t_EQUAL_EQUAL = r'\=\='
 t_NOT_EQUAL = r'\!\='
 t_LESS_EQUAL = r'\<\='
 t_GREATER_EQUAL = r'\>\='
-t_AMPERSAND = r'\&'
 t_ARROW = r'\->'
 
 
@@ -94,9 +92,9 @@ def t_VARIABLE(t):
     return t
 
 
-def t_CADENA(t):
+def t_STRING(t):
     r'\"{1}.*"{1}'
-    t.type = reserved.get(t.value, 'CADENA')
+    t.type = reserved.get(t.value, 'STRING')
     return t
 
 
