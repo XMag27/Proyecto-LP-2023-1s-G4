@@ -16,7 +16,11 @@ def p_declaracion(p):
     '''declaracion : declaracion_variable
                      | declaracion_estructura
                      | declaracion_constante
-                     | declaracion_mutable'''
+                     | declaracion_mutable
+                     | declaracion_array 
+                     | declaracion_struct_control
+                     | declaracion_vector
+                     | declaracion_struct_datos'''
     
 def p_declaracion_variable(p):
     '''declaracion_variable : LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
@@ -121,8 +125,8 @@ def p_expresion_funcion(p):
 
 def p_expresion_estructura(p):
     '''expresion_estructura : hashmap
-                | if
-                | loop'''
+                | array 
+                '''
 
 
 def p_hashmap(p):
@@ -144,7 +148,28 @@ def p_argumentos(p):
 def p_argumento(p):
     '''argumento : expresion'''
 
+#Fausto Jacome
+def p_declaracion_array(p):
+    ''' declaracion_array : LET MUT VARIABLE DOUBLE_POINT array EQUAL L_BRACKET array_fill R_BRACKET SEMICOLON
+                | LET MUT VARIABLE DOUBLE_POINT array SEMICOLON '''
+def p_array(p):
+    ''' array : ARRAY L_BRACKET var_array R_BRACKET '''
+    
+def p_var_array(p):
+    ''' var_array : tipo SEMICOLON NUMBER ''' 
 
+def p_array_fill(p):
+    ''' array_fill : VARIABLE COMMA array_fill 
+                    | VARIABLE '''
+def p_declaracion_struct_control(p):
+    ''' declaracion_struct_control : while
+                                    | if
+                                    | loop'''
+def p_while(p):
+    ''' while : WHILE expresion_condicion bloque '''
+
+
+        
 #Donoso Bravo Luis Alejandro
 
 def p_break(p):
