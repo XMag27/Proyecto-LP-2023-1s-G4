@@ -14,7 +14,9 @@ def p_item(p):
 
 def p_declaracion(p):
     '''declaracion : declaracion_variable
-                     | declaracion_estructura'''
+                     | declaracion_estructura
+                     | declaracion_constante
+                     | declaracion_mutable'''
     
 def p_declaracion_variable(p):
     '''declaracion_variable : LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
@@ -26,6 +28,7 @@ def p_declaracion_variable(p):
 def p_declaracion_estructura(p):
     '''declaracion_estructura : STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON
                               | STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON'''
+
 
 
 def p_campos(p):
@@ -85,7 +88,8 @@ def p_sentencias(p):
 def p_sentencia(p):
     '''sentencia : expresion SEMICOLON
                  | declaracion
-                 | asignacion'''
+                 | asignacion
+                 | break'''
 
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUAL expresion SEMICOLON'''
@@ -103,8 +107,11 @@ def p_expresion_literal(p):
 def p_literal(p):
     '''literal : NUMBER
                 | STRING
-                | TRUE
-                | FALSE'''
+                | boolean'''
+
+def p_boolean(p):
+    '''boolean : TRUE
+               | FALSE'''
     
 def p_expresion_variable(p):
     '''expresion_variable : VARIABLE'''
@@ -113,7 +120,10 @@ def p_expresion_funcion(p):
     '''expresion_funcion : VARIABLE LPAREN argumentos RPAREN SEMICOLON'''
 
 def p_expresion_estructura(p):
-    '''expresion_estructura : hashmap'''
+    '''expresion_estructura : hashmap
+                | if
+                | loop'''
+
 
 def p_hashmap(p):
     '''hashmap : LDIAMOND hashmap_types RDIAMOND'''
@@ -135,7 +145,61 @@ def p_argumento(p):
     '''argumento : expresion'''
 
 
-    
+#Donoso Bravo Luis Alejandro
+
+def p_break(p):
+    '''break : BREAK SEMICOLON'''
+def p_declaracion_constante(p):
+    '''declaracion_constante : CONST VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+                             | CONST VARIABLE DOUBLE_POINT tipo SEMICOLON
+                             | CONST VARIABLE EQUAL expresion SEMICOLON
+                             | CONST VARIABLE SEMICOLON'''
+
+def p_declaracion_mutable(p):
+    '''declaracion_mutable : MUT VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+                           | MUT VARIABLE DOUBLE_POINT tipo SEMICOLON
+                           | MUT VARIABLE EQUAL expresion SEMICOLON
+                           | MUT VARIABLE SEMICOLON'''
+
+
+def p_if(p):
+    '''if : IF condicion bloque
+          | IF condicion bloque ELSE bloque'''
+
+def p_condicion(p):
+    '''condicion : expresion_condicion
+                 | expresion_condicion logic_operator expresion_condicion'''
+
+def p_logic_operator(p):
+    '''logic_operator : AND
+                      | OR'''
+def p_expresion_condicion(p):
+    '''expresion_condicion : boolean
+                             | expresion_variable comparacion expresion_variable
+                             | expresion_variable comparacion expression_literal
+                             | expression_literal comparacion expresion_variable
+                             | expression_literal comparacion expression_literal'''
+
+def p_comparacion(p):
+    '''comparison : EQUAL_EQUAL
+                    | NOT_EQUAL
+                    | GREATER
+                    | GREATER_EQUAL
+                    | LESS
+                    | LESS_EQUAL'''
+
+
+def p_loop(p):
+    '''loop : LOOP bloque'''
+
+
+def p_declaracion_vector(p):
+    '''declaracion_vector : LET VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND EQUAL expresion SEMICOLON
+                          | LET VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND SEMICOLON
+                          | LET  MUT VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND EQUAL expresion SEMICOLON
+                          | LET MUT VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND SEMICOLON'''
+
+
 
 def p_error(p):
     if p:
