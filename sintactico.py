@@ -93,7 +93,10 @@ def p_sentencia(p):
                  | declaracion
                  | asignacion
                  | break
-                 | funciones_vector'''
+                 | funciones_vector
+                 | funciones_hashmap'''
+
+
 
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUAL expresion SEMICOLON'''
@@ -240,6 +243,22 @@ def p_funciones_vector(p):
                          | VARIABLE DOT SWAP LPAREN expresion COMMA expresion RPAREN SEMICOLON
                          | VARIABLE DOT REVERSE LPAREN RPAREN SEMICOLON
                          | VARIABLE DOT ITER LPAREN RPAREN SEMICOLON'''
+
+def p_funciones_hashmap(p):
+    ''' funciones_hashmap : insert
+                          | get
+                          | contains_key'''
+
+def p_insert(p):
+    ''' insert : VARIABLE DOT INSERT LPAREN expresion COMMA expresion RPAREN SEMICOLON'''
+
+
+def p_get(p):
+    ''' get : VARIABLE DOT GET LPAREN expresion RPAREN SEMICOLON'''
+
+def p_contains_key(p):
+    ''' contains_key : VARIABLE DOT CONTAINS_KEY LPAREN expresion RPAREN SEMICOLON'''
+
 
 
 def p_error(p):

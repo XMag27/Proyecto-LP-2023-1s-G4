@@ -1,6 +1,5 @@
 import tkinter
 from lexico import lexer as lx
-import sintactico
 from sintactico import sintactico as sx
 
 

@@ -59,13 +59,15 @@ reserved = {
     'reverse' : 'REVERSE',
     'iter' : 'ITER',
     'array' : 'ARRAY',
+    'insert' : 'INSERT',
+    'contains_key' : 'CONTAINS_KEY',
 }
 
 # Sequencia de tokens, puede ser lista o tupla
 tokens = ('NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN',
           'LBRACKET', 'RBRACKET', 'VARIABLE', 'STRING', 'SEMICOLON',
-          'EXCLAMATION', 'EQUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET', 'DOUBLE_POINT', 'POINT', 'PERCENTAGE', 'AND', 'OR', 'BITAND' , 'BITOR', 'BITXOR',
-          'LDIAMOND', 'RDIAMOND', 'GREATER', 'LESS', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW', 'DOT') + tuple(reserved.values())
+          'EXCLAMATION', 'EQUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET', 'DOUBLE_POINT', 'PERCENTAGE', 'AND', 'OR', 'BITAND' , 'BITOR', 'BITXOR',
+          'LDIAMOND', 'RDIAMOND', 'GREATER', 'LESS', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW', 'DOT',) + tuple(reserved.values())
 
 # Exp Regulares para tokens de símbolos
 # Xavier Magallanes
@@ -86,7 +88,6 @@ t_EQUAL = r'\='
 t_L_BRACKET = r'\['
 t_R_BRACKET = r'\]'
 t_DOUBLE_POINT = r'\:'
-t_POINT = r'\.'
 t_PERCENTAGE = r'\%'
 t_AND = r'\&\&'
 t_OR = r'\|\|'
@@ -102,7 +103,7 @@ t_EQUAL_EQUAL = r'\=\='
 t_NOT_EQUAL = r'\!\='
 t_LESS_EQUAL = r'\<\='
 t_GREATER_EQUAL = r'\>\='
-t_ARROW = r'\->'
+t_ARROW = r'\-\>'
 t_DOT = r'\.'
 
 
