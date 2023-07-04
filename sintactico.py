@@ -19,8 +19,7 @@ def p_declaracion(p):
                      | declaracion_mutable
                      | declaracion_array 
                      | declaracion_struct_control
-                     | declaracion_vector
-                     | declaracion_struct_datos'''
+                     | declaracion_vector'''
     
 def p_declaracion_variable(p):
     '''declaracion_variable : LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
@@ -93,7 +92,8 @@ def p_sentencia(p):
     '''sentencia : expresion SEMICOLON
                  | declaracion
                  | asignacion
-                 | break'''
+                 | break
+                 | funciones_vector'''
 
 def p_asignacion(p):
     '''asignacion : VARIABLE EQUAL expresion SEMICOLON'''
@@ -198,20 +198,24 @@ def p_condicion(p):
 def p_logic_operator(p):
     '''logic_operator : AND
                       | OR'''
-def p_expresion_condicion(p):
-    '''expresion_condicion : boolean
-                             | expresion_variable comparacion expresion_variable
-                             | expresion_variable comparacion expression_literal
-                             | expression_literal comparacion expresion_variable
-                             | expression_literal comparacion expression_literal'''
 
 def p_comparacion(p):
-    '''comparison : EQUAL_EQUAL
+    '''comparacion : EQUAL_EQUAL
                     | NOT_EQUAL
                     | GREATER
                     | GREATER_EQUAL
                     | LESS
                     | LESS_EQUAL'''
+
+
+def p_expresion_condicion(p):
+    '''expresion_condicion : boolean
+                             | expresion_variable comparacion expresion_variable
+                             | expresion_variable comparacion expresion_literal
+                             | expresion_literal comparacion expresion_variable
+                             | expresion_literal comparacion expresion_literal'''
+
+
 
 
 def p_loop(p):
@@ -225,7 +229,7 @@ def p_declaracion_vector(p):
                           | LET MUT VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND SEMICOLON'''
 
 def p_funciones_vector(p):
-    ''' funciones_vector: VARIABLE DOT PUSH LPAREN expresion RPAREN SEMICOLON
+    ''' funciones_vector : VARIABLE DOT PUSH LPAREN expresion RPAREN SEMICOLON
                          | VARIABLE DOT POP LPAREN RPAREN SEMICOLON
                          | VARIABLE DOT LEN LPAREN RPAREN SEMICOLON
                          | VARIABLE DOT IS_EMPTY LPAREN RPAREN SEMICOLON
@@ -236,6 +240,7 @@ def p_funciones_vector(p):
                          | VARIABLE DOT SWAP LPAREN expresion COMMA expresion RPAREN SEMICOLON
                          | VARIABLE DOT REVERSE LPAREN RPAREN SEMICOLON
                          | VARIABLE DOT ITER LPAREN RPAREN SEMICOLON'''
+
 
 def p_error(p):
     if p:

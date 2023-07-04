@@ -58,13 +58,14 @@ reserved = {
     'swap' : 'SWAP',
     'reverse' : 'REVERSE',
     'iter' : 'ITER',
+    'array' : 'ARRAY',
 }
 
 # Sequencia de tokens, puede ser lista o tupla
 tokens = ('NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN',
           'LBRACKET', 'RBRACKET', 'VARIABLE', 'STRING', 'SEMICOLON',
           'EXCLAMATION', 'EQUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET', 'DOUBLE_POINT', 'POINT', 'PERCENTAGE', 'AND', 'OR', 'BITAND' , 'BITOR', 'BITXOR',
-          'LDIAMOND', 'RDIAMOND', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW') + tuple(reserved.values())
+          'LDIAMOND', 'RDIAMOND', 'GREATER', 'LESS', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW', 'DOT') + tuple(reserved.values())
 
 # Exp Regulares para tokens de símbolos
 # Xavier Magallanes
@@ -95,11 +96,14 @@ t_BITXOR = r'\^'
 # Donoso Bravo Luis Alejandro
 t_LDIAMOND = r'\<'
 t_RDIAMOND = r'\>'
+t_GREATER = r'\>'
+t_LESS = r'\<'
 t_EQUAL_EQUAL = r'\=\='
 t_NOT_EQUAL = r'\!\='
 t_LESS_EQUAL = r'\<\='
 t_GREATER_EQUAL = r'\>\='
 t_ARROW = r'\->'
+t_DOT = r'\.'
 
 
 
@@ -142,10 +146,7 @@ def t_None(t):
     t.type = reserved.get(t.value, 'NONE')
     return t
 
-def t_Array(t):
-    r'array'
-    t.type = reserved.get(t.value, 'ARRAY')
-    return t
+
 
 
 # Ignorar lo que no sea un token en mi LP
