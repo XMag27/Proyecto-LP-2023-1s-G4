@@ -47,6 +47,17 @@ reserved = {
     'char' : 'CHAR',
     'str' : 'STR',
     'const' : 'CONST',
+    'push' : 'PUSH',
+    'pop' : 'POP',
+    'len' : 'LEN',
+    'clear' : 'CLEAR',
+    'is_empty' : 'IS_EMPTY',
+    'get' : 'GET',
+    'set' : 'SET',
+    'remove' : 'REMOVE',
+    'swap' : 'SWAP',
+    'reverse' : 'REVERSE',
+    'iter' : 'ITER',
 }
 
 # Sequencia de tokens, puede ser lista o tupla

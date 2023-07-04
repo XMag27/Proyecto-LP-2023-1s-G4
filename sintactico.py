@@ -224,7 +224,18 @@ def p_declaracion_vector(p):
                           | LET  MUT VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND EQUAL expresion SEMICOLON
                           | LET MUT VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND SEMICOLON'''
 
-
+def p_funciones_vector(p):
+    ''' funciones_vector: VARIABLE DOT PUSH LPAREN expresion RPAREN SEMICOLON
+                         | VARIABLE DOT POP LPAREN RPAREN SEMICOLON
+                         | VARIABLE DOT LEN LPAREN RPAREN SEMICOLON
+                         | VARIABLE DOT IS_EMPTY LPAREN RPAREN SEMICOLON
+                         | VARIABLE DOT GET LPAREN NUMBER RPAREN SEMICOLON
+                         | VARIABLE DOT SET LPAREN NUMBER COMMA expresion RPAREN SEMICOLON
+                         | VARIABLE DOT REMOVE LPAREN expresion RPAREN SEMICOLON
+                         | VARIABLE DOT CLEAR LPAREN RPAREN SEMICOLON
+                         | VARIABLE DOT SWAP LPAREN expresion COMMA expresion RPAREN SEMICOLON
+                         | VARIABLE DOT REVERSE LPAREN RPAREN SEMICOLON
+                         | VARIABLE DOT ITER LPAREN RPAREN SEMICOLON'''
 
 def p_error(p):
     if p:
