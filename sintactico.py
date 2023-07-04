@@ -270,12 +270,3 @@ def p_error(p):
 
 # Build the parser
 sintactico = yacc.yacc()
-
-while True:
-   try:
-       s = input('rust > ')
-   except EOFError:
-       break
-   if not s: continue
-   result = sintactico.parse(s)
-   if result!=None: print(result)

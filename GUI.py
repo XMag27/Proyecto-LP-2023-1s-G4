@@ -18,10 +18,10 @@ def analisis_sintactico():
     cadena = text_input.get("1.0", tkinter.END)
     s = cadena
     if s:
-        sintactico.output = ''
+        sx.output = ''
         result = sx.parse(s)
-    if sintactico.output:
-        return str(sintactico.output)+str(result)
+    if sx.output:
+        return str(sx.output)+str(result)
     else:
         return str(result)
 
@@ -66,4 +66,4 @@ text_output_sintactico.pack()
 text_output_semantico = tkinter.Text(Window, height=10, width=100)
 text_output_semantico.pack()
 
-
+Window.mainloop()

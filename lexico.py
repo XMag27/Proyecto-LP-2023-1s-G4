@@ -232,8 +232,3 @@ fn main() {
 lexer.input(data)
 
 # Tokenizador
-while True:
-    tok = lexer.token()
-    if not tok:
-        break  # Rompe
-    print(tok)
