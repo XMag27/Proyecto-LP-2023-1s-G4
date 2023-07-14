@@ -206,9 +206,9 @@ println!("Random: {}", n1);
 }
 
 // Donoso Bravo Luis Alejandro
-fn binary_search<T>: Ord>(array: &[T], target: &T) -> Option<usize> {
+fn binary_search() {
     let mut left = 0;
-    let mut right = array.len() - 1;
+    let mut right = array.len();
 
     while left <= right {
         let mid = left + right - left / 2;
