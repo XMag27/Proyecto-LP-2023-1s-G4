@@ -1,238 +1,234 @@
 from lexico import tokens
 import ply.yacc as yacc
-
-# Xavier Magallanes
-def p_programa(p):
-    '''programa : programa item
+#Xavier Magallanes
+def p_program(p):
+    '''program : program item
                 | item'''
 
 def p_item(p):
-    '''item : declaracion
-            | importacion
-            | funcion
-            | error'''
+    '''item : definicion
+            | estructuracontrol
+            | PRINT EXCLAMATION LPAREN STRING RPAREN SEMICOLON
+            | PRINT EXCLAMATION LPAREN STRING COMMA expresion RPAREN SEMICOLON
+            | PRINT EXCLAMATION LPAREN STRING COMMA vars  RPAREN SEMICOLON
+            | expresion
+            | expresion SEMICOLON
+            | continue
+            | break
+            | funcionesesdata
+            | RETURN expresion SEMICOLON
+            '''
 
-def p_declaracion(p):
-    '''declaracion : declaracion_variable
-                     | declaracion_estructura
-                     | declaracion_constante
-                     | declaracion_mutable
-                     | declaracion_array 
-                     | declaracion_struct_control
-                     | declaracion_vector'''
+def p_estructuracontrol(p):
+    '''estructuracontrol : for
+                        | while
+                        | if
+                        | loop'''
+
+
+def p_for(p):
+    '''for : FOR VARIABLE IN VARIABLE LBRACKET program RBRACKET
+            | FOR VARIABLE IN VARIABLE LBRACKET RBRACKET
+            | FOR VARIABLE IN NUMBER DOT DOT EQUAL NUMBER LBRACKET program RBRACKET
+            | FOR VARIABLE IN NUMBER DOT DOT EQUAL NUMBER LBRACKET RBRACKET
+            | FOR VARIABLE IN expresion LBRACKET program RBRACKET
+            | FOR VARIABLE IN expresion LBRACKET RBRACKET'''
+
+def p_definicion(p):
+    '''definicion : definicionvariable
+                    | definicionestructura
+                    | definicionfuncion
+                    | definicionestructuradatos'''
     
-def p_declaracion_variable(p):
-    '''declaracion_variable : LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
-                            | LET VARIABLE DOUBLE_POINT tipo SEMICOLON
-                            | LET VARIABLE EQUAL expresion SEMICOLON
-                            | LET VARIABLE SEMICOLON'''
 
-
-def p_declaracion_estructura(p):
-    '''declaracion_estructura : STRUCT VARIABLE LBRACKET campos RBRACKET SEMICOLON
-                              | STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON'''
-
-
-
-def p_campos(p):
-    '''campos : campos COMMA campo
-              | campo'''
-
-def p_campo(p):
-    '''campo : VARIABLE DOUBLE_POINT tipo'''
-
-def p_tipo(p):
-    '''tipo : tipo_simple '''
-
-def p_tipo_simple(p):
-    '''tipo_simple : INT8
-                    | INT16
-                    | INT32
-                    | INT64
-                    | UINT8
-                    | UINT16
-                    | UINT32
-                    | UINT64
-                    | FLOAT32
-                    | FLOAT64
-                    | BOOL
-                    | CHAR
-                    | STR'''
-
-def p_importacion(p):
-    '''importacion : USE VARIABLE SEMICOLON'''
-
-def p_funcion(p):
-    '''funcion : funcion_generica'''
-
-def p_funcion_generica(p):
-    '''funcion_generica : FN VARIABLE LPAREN parametros RPAREN ARROW tipo_simple bloque'''
-
-
-def p_parametros(p):
-    '''parametros : parametros COMMA parametro
-                  | parametro
-                  | empty'''
+def p_definicionestructuradatos(p):
+    '''definicionestructuradatos : hashmap
+                                | array
+                                | vector
+                                | list'''
     
-def p_empty(p):
-    'empty :'
-    pass
+def p_list(p):
+    ''' list : LET VARIABLE EQUAL L_BRACKET numeros R_BRACKET SEMICOLON'''
 
-def p_parametro(p):
-    '''parametro : VARIABLE DOUBLE_POINT tipo'''
-
-def p_bloque(p):
-    '''bloque : LBRACKET sentencias RBRACKET'''
-
-def p_sentencias(p):
-    '''sentencias : sentencias sentencia
-                  | sentencia'''
-
-def p_sentencia(p):
-    '''sentencia : expresion SEMICOLON
-                 | declaracion
-                 | asignacion
-                 | break
-                 | funciones_vector
-                 | funciones_hashmap'''
-
-
-
-def p_asignacion(p):
-    '''asignacion : VARIABLE EQUAL expresion SEMICOLON'''
-
-
-def p_expresion(p):
-    '''expresion : expresion_literal
-                    | expresion_variable
-                    | expresion_funcion
-                    | expresion_estructura'''
-
-def p_expresion_literal(p):
-    '''expresion_literal : literal'''
-
-def p_literal(p):
-    '''literal : NUMBER
-                | STRING
-                | boolean'''
-
-def p_boolean(p):
-    '''boolean : TRUE
-               | FALSE'''
-    
-def p_expresion_variable(p):
-    '''expresion_variable : VARIABLE'''
-
-def p_expresion_funcion(p):
-    '''expresion_funcion : VARIABLE LPAREN argumentos RPAREN SEMICOLON'''
-
-def p_expresion_estructura(p):
-    '''expresion_estructura : hashmap
-                | array 
-                '''
-
+def p_numeros(p):
+    ''' numeros : NUMBER
+                | NUMBER COMMA numeros'''
 
 def p_hashmap(p):
-    '''hashmap : LDIAMOND hashmap_types RDIAMOND'''
+    '''hashmap : LET MUT VARIABLE DOUBLE_POINT HASHMAP LDIAMOND tipo COMMA tipo RDIAMOND EQUAL HASHMAP DOUBLE_POINT DOUBLE_POINT NEW LPAREN RPAREN SEMICOLON'''
 
-def p_hashmap_types(p):
-    '''hashmap_types : hashmap_types COMMA hashmap_type
-                     | hashmap_type'''
+def p_funcioneshashmap(p):
+    ''' funcioneshashmap : VARIABLE DOT INSERT LPAREN expresion COMMA expresion RPAREN 
+                            | VARIABLE DOT REMOVE LPAREN expresion RPAREN 
+                            | VARIABLE DOT GET LPAREN expresion RPAREN 
+                            | VARIABLE DOT LEN LPAREN RPAREN 
+                            | VARIABLE DOT IS_EMPTY LPAREN RPAREN 
+                            | VARIABLE DOT CLEAR LPAREN RPAREN 
+                            | VARIABLE DOT ITER LPAREN RPAREN '''
+
+def p_definicionestructura(p):
+    '''definicionestructura : STRUCT VARIABLE LBRACKET item RBRACKET SEMICOLON
+                            | STRUCT VARIABLE LBRACKET RBRACKET SEMICOLON'''
+
+def p_definicionvariable(p):
+    '''definicionvariable : LET VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+                            | LET VARIABLE EQUAL expresion SEMICOLON
+                            | LET MUT VARIABLE EQUAL expresion SEMICOLON
+                            | LET MUT VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
+                            | LET VARIABLE DOUBLE_POINT tipo EQUAL STRING SEMICOLON
+                            | LET MUT VARIABLE DOUBLE_POINT tipo EQUAL STRING SEMICOLON
+                            | LET VARIABLE DOUBLE_POINT tipo SEMICOLON
+                            | LET MUT VARIABLE DOUBLE_POINT tipo SEMICOLON
+                            | LET VARIABLE SEMICOLON
+                            | VARIABLE EQUAL expresion SEMICOLON
+                            | VARIABLE EQUAL STRING SEMICOLON
+                            | LET VARIABLE EQUAL expresion
+                            | declaracion_constante
+                            | declaracion_mutable
+                            | LET VARIABLE LPAREN VARIABLE RPAREN EQUAL llamarfuncion '''
     
-def p_hashmap_type(p):
-    '''hashmap_type : tipo'''
+def p_vars(p):
+    '''vars : VARIABLE
+            | VARIABLE COMMA vars'''
+
+def p_tipo(p):
+    '''tipo : INT8
+            | INT16
+            | INT32
+            | INT64
+            | UINT8
+            | UINT16
+            | UINT32
+            | UINT64
+            | FLOAT32
+            | FLOAT64
+            | BOOL
+            | CHAR
+            | STR
+            | VARIABLE
+            | VEC tipo '''
+
+def p_expresion(p):
+    '''expresion : ops
+                | NUMBER
+                | FLOAT
+                | STRING
+                | TRUE
+                | FALSE
+                | VARIABLE
+                | expresion
+                | opbasicas
+                | estructuracontrol
+                | definicionvariable
+                | llamarfuncion'''
+
+def p_llamarfuncion(p):
+    '''llamarfuncion : VARIABLE LPAREN RPAREN SEMICOLON
+                    | VARIABLE LPAREN expresion RPAREN SEMICOLON
+                    | VARIABLE LPAREN expresion COMMA expresion RPAREN SEMICOLON
+                    | VARIABLE LPAREN operandos RPAREN SEMICOLON 
+                    | VARIABLE LPAREN operandos RPAREN '''
+    
+def p_operaciones(p):
+    ''' operaciones : PLUS
+            | MINUS
+            | TIMES
+            | DIVIDE
+            | RDIAMOND
+            | LDIAMOND
+            | EQUAL_EQUAL
+            | NOT_EQUAL
+            | LESS_EQUAL
+            | GREATER_EQUAL
+            | PLUS_EQUAL'''
+    
+def p_operandos(p):
+    '''operandos : NUMBER
+                | FLOAT
+                | VARIABLE 
+                | STRING
+                | opbasicas
+                | TIMES VARIABLE
+                | BITAND VARIABLE
+                | operandos COMMA operandos'''
+    
+def p_variables(p):
+    '''variables : VARIABLE
+                | VARIABLE COMMA variables'''
 
 
-def p_argumentos(p):
-    '''argumentos : argumentos COMMA argumento
-                  | argumento
-                  | empty'''
 
-def p_argumento(p):
-    '''argumento : expresion'''
+def p_definicionfuncion(p):
+    '''definicionfuncion : funciongenerica
 
-#Fausto Jacome
-def p_declaracion_array(p):
-    ''' declaracion_array : LET MUT VARIABLE DOUBLE_POINT array EQUAL L_BRACKET array_fill R_BRACKET SEMICOLON
-                | LET MUT VARIABLE DOUBLE_POINT array SEMICOLON '''
+'''
+
+def p_funciongenerica(p):
+    '''funciongenerica : FN VARIABLE LPAREN RPAREN LBRACKET program RBRACKET'''
+
+#FAUSTO JACOME
 def p_array(p):
-    ''' array : ARRAY L_BRACKET var_array R_BRACKET '''
-    
-def p_var_array(p):
-    ''' var_array : tipo SEMICOLON NUMBER ''' 
-
-def p_array_fill(p):
-    ''' array_fill : VARIABLE COMMA array_fill 
-                    | VARIABLE '''
-def p_declaracion_struct_control(p):
-    ''' declaracion_struct_control : while
-                                    | if
-                                    | loop'''
+    ''' array : LET MUT ARRAY DOUBLE_POINT L_BRACKET tipo SEMICOLON NUMBER R_BRACKET EQUAL L_BRACKET NUMBER SEMICOLON NUMBER R_BRACKET SEMICOLON
+        | LET MUT VARIABLE DOUBLE_POINT array SEMICOLON'''
 def p_while(p):
-    ''' while : WHILE expresion_condicion bloque '''
+    '''while : WHILE LPAREN expresion RPAREN LBRACKET program RBRACKET
+            | WHILE  expresion LBRACKET program RBRACKET'''
 
 
-        
-#Donoso Bravo Luis Alejandro
+def p_funcionesarray(p):
+    ''' funcionesarray : VARIABLE DOT LEN LPAREN RPAREN SEMICOLON
+                        | VARIABLE DOT IS_EMPTY LPAREN RPAREN SEMICOLON
+                        | VARIABLE DOT CLEAR LPAREN RPAREN SEMICOLON
+                        | VARIABLE DOT ITER LPAREN RPAREN SEMICOLON'''
 
+
+#ALEJANDRO DONOSO
+
+def p_expresionlogica(p):
+    '''expresionlogica : operandos AND operandos
+                        | operandos OR operandos
+                        | operandos
+                        | TRUE
+                        | FALSE'''
+    
 def p_break(p):
-    '''break : BREAK SEMICOLON'''
+    '''break : BREAK SEMICOLON
+            | BREAK expresion SEMICOLON'''
+def p_continue(p):
+    '''continue : CONTINUE SEMICOLON'''
+
 def p_declaracion_constante(p):
     '''declaracion_constante : CONST VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
                              | CONST VARIABLE DOUBLE_POINT tipo SEMICOLON
                              | CONST VARIABLE EQUAL expresion SEMICOLON
                              | CONST VARIABLE SEMICOLON'''
-
 def p_declaracion_mutable(p):
     '''declaracion_mutable : MUT VARIABLE DOUBLE_POINT tipo EQUAL expresion SEMICOLON
                            | MUT VARIABLE DOUBLE_POINT tipo SEMICOLON
                            | MUT VARIABLE EQUAL expresion SEMICOLON
                            | MUT VARIABLE SEMICOLON'''
 
-
 def p_if(p):
-    '''if : IF condicion bloque
-          | IF condicion bloque ELSE bloque'''
-
-def p_condicion(p):
-    '''condicion : expresion_condicion
-                 | expresion_condicion logic_operator expresion_condicion'''
-
-def p_logic_operator(p):
-    '''logic_operator : AND
-                      | OR'''
-
-def p_comparacion(p):
-    '''comparacion : EQUAL_EQUAL
-                    | NOT_EQUAL
-                    | GREATER
-                    | GREATER_EQUAL
-                    | LESS
-                    | LESS_EQUAL'''
-
-
-def p_expresion_condicion(p):
-    '''expresion_condicion : boolean
-                             | expresion_variable comparacion expresion_variable
-                             | expresion_variable comparacion expresion_literal
-                             | expresion_literal comparacion expresion_variable
-                             | expresion_literal comparacion expresion_literal'''
-
-
-
-
+    ''' if : IF expresion LBRACKET program RBRACKET 
+           | IF expresion LBRACKET program RBRACKET ELSE 
+           | IF expresion LBRACKET program RBRACKET ELSE LBRACKET program RBRACKET'''
+    
 def p_loop(p):
-    '''loop : LOOP bloque'''
+    '''loop : LOOP LBRACKET program RBRACKET'''
 
-
-def p_declaracion_vector(p):
-    '''declaracion_vector : LET VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND EQUAL expresion SEMICOLON
+def p_vector(p):
+    '''vector : LET VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND EQUAL expresion SEMICOLON
                           | LET VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND SEMICOLON
                           | LET  MUT VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND EQUAL expresion SEMICOLON
-                          | LET MUT VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND SEMICOLON'''
+                          | LET MUT VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND SEMICOLON
+                          | LET VARIABLE DOUBLE_POINT VEC LDIAMOND tipo RDIAMOND EQUAL VEC DOUBLE_POINT DOUBLE_POINT NEW LPAREN RPAREN SEMICOLON '''
+def p_funcionesesdata(p):
+    '''funcionesesdata : funcionesvector
+                        | funcioneshashmap
+                        | funcionesarray'''
 
-def p_funciones_vector(p):
-    ''' funciones_vector : VARIABLE DOT PUSH LPAREN expresion RPAREN SEMICOLON
+def p_funcionesvector(p):
+    ''' funcionesvector : VARIABLE DOT PUSH LPAREN expresion RPAREN SEMICOLON
                          | VARIABLE DOT POP LPAREN RPAREN SEMICOLON
                          | VARIABLE DOT LEN LPAREN RPAREN SEMICOLON
                          | VARIABLE DOT IS_EMPTY LPAREN RPAREN SEMICOLON
@@ -243,30 +239,30 @@ def p_funciones_vector(p):
                          | VARIABLE DOT SWAP LPAREN expresion COMMA expresion RPAREN SEMICOLON
                          | VARIABLE DOT REVERSE LPAREN RPAREN SEMICOLON
                          | VARIABLE DOT ITER LPAREN RPAREN SEMICOLON'''
-
-def p_funciones_hashmap(p):
-    ''' funciones_hashmap : insert
-                          | get
-                          | contains_key'''
-
-def p_insert(p):
-    ''' insert : VARIABLE DOT INSERT LPAREN expresion COMMA expresion RPAREN SEMICOLON'''
-
-
-def p_get(p):
-    ''' get : VARIABLE DOT GET LPAREN expresion RPAREN SEMICOLON'''
-
-def p_contains_key(p):
-    ''' contains_key : VARIABLE DOT CONTAINS_KEY LPAREN expresion RPAREN SEMICOLON'''
+def p_opbasicas(p):
+    '''opbasicas : ARRAY DOT LEN LPAREN RPAREN
+                   | BITAND VARIABLE L_BRACKET NUMBER DOT DOT NUMBER R_BRACKET
+                   | VARIABLE DOT ITER LPAREN RPAREN
+                    | ARRAY L_BRACKET operandos R_BRACKET
+                   | LPAREN NUMBER DOT DOT NUMBER RPAREN DOT REV LPAREN RPAREN
+                   | STRING DOT TO_STRING LPAREN RPAREN
+                   | VARIABLE LPAREN variables RPAREN
+                   | VEC EXCLAMATION L_BRACKET numeros R_BRACKET
+                   '''
 
 
+
+
+def p_ops(p):
+        ''' ops : operandos operaciones operandos
+            | operandos operaciones ops '''
 
 def p_error(p):
     if p:
          print("Error de sintaxis en token:", p.type)
-         #sintactico.errok()
     else:
          print("Syntax error at EOF")
+
 
 # Build the parser
 sintactico = yacc.yacc()

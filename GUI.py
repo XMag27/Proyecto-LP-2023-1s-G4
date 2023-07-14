@@ -14,22 +14,17 @@ def analisis_lexico():
     return lexreturn
 
 def analisis_sintactico():
-    result = ''
+    sintreturn = ''
     cadena = text_input.get("1.0", tkinter.END)
     s = cadena
     if s:
-        sx.output = ''
-        result = sx.parse(s)
-    if sx.output:
-        return str(sx.output)+str(result)
-    else:
-        return str(result)
+        sx.parse(s)
+    return sintreturn
 
 
 def clear_input():
     text_input.delete("1.0", tkinter.END)
     text_output_lexico.delete("1.0", tkinter.END)
-    text_output_semantico.delete("1.0", tkinter.END)
     text_output_sintactico.delete("1.0", tkinter.END)
 
 
@@ -63,7 +58,5 @@ text_output_lexico.pack()
 text_output_sintactico = tkinter.Text(Window, height=10, width=100)
 text_output_sintactico.pack()
 
-text_output_semantico = tkinter.Text(Window, height=10, width=100)
-text_output_semantico.pack()
 
 Window.mainloop()

@@ -61,13 +61,18 @@ reserved = {
     'array' : 'ARRAY',
     'insert' : 'INSERT',
     'contains_key' : 'CONTAINS_KEY',
+    'in' : 'IN',
+    'HashMap' : 'HASHMAP',
+    'new' : 'NEW',
+    'rev' : 'REV',
+    'to_string' : 'TO_STRING',
 }
 
 # Sequencia de tokens, puede ser lista o tupla
 tokens = ('NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN',
           'LBRACKET', 'RBRACKET', 'VARIABLE', 'STRING', 'SEMICOLON',
           'EXCLAMATION', 'EQUAL', 'COMMA', 'L_BRACKET', 'R_BRACKET', 'DOUBLE_POINT', 'PERCENTAGE', 'AND', 'OR', 'BITAND' , 'BITOR', 'BITXOR',
-          'LDIAMOND', 'RDIAMOND', 'GREATER', 'LESS', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW', 'DOT',) + tuple(reserved.values())
+          'LDIAMOND', 'RDIAMOND', 'GREATER', 'LESS', 'EQUAL_EQUAL', 'NOT_EQUAL', 'LESS_EQUAL', 'GREATER_EQUAL', 'ARROW', 'DOT', 'FLOAT', 'PLUS_EQUAL', 'ITER', 'REV', 'TO_STRING',) + tuple(reserved.values())
 
 # Exp Regulares para tokens de símbolos
 # Xavier Magallanes
@@ -84,6 +89,8 @@ t_NUMBER = r'\d+'
 t_SEMICOLON = r'\;'
 t_EXCLAMATION = r'\!'
 t_EQUAL = r'\='
+t_FLOAT = r'\d+\.\d+'
+t_PLUS_EQUAL = r'\+\='
 # Fausto Jacome
 t_L_BRACKET = r'\['
 t_R_BRACKET = r'\]'
@@ -164,6 +171,7 @@ def t_error(t):
 lexer = lex.lex()
 
 data = '''
+XMAGALLANES
     let mut x = 5;
     let y = 10;
     let z = x + y;
@@ -172,7 +180,7 @@ data = '''
     let resultado = loop {
         contador += 1;
         if contador == 10 {
-            break contador * 2;
+            break contador;
 }
 };
     println!("El resultado es {}", resultado);
@@ -183,6 +191,8 @@ data = '''
     for numero in (1..4).rev() {
         println!("{}!", numero);
 }
+
+FJACOME
 
 use rand::Rng;
 
@@ -201,7 +211,7 @@ fn binary_search<T>: Ord>(array: &[T], target: &T) -> Option<usize> {
     let mut right = array.len() - 1;
 
     while left <= right {
-        let mid = left + (right - left) / 2;
+        let mid = left + right - left / 2;
         
         if array[mid] == *target {
             return Some(mid);
