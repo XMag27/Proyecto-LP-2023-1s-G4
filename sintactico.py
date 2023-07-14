@@ -17,6 +17,8 @@ def p_item(p):
             | break
             | funcionesesdata
             | RETURN expresion SEMICOLON
+            | import
+            | llamadarandom
             '''
 
 def p_estructuracontrol(p):
@@ -85,7 +87,8 @@ def p_definicionvariable(p):
                             | LET VARIABLE EQUAL expresion
                             | declaracion_constante
                             | declaracion_mutable
-                            | LET VARIABLE LPAREN VARIABLE RPAREN EQUAL llamarfuncion '''
+                            | LET VARIABLE LPAREN VARIABLE RPAREN EQUAL llamarfuncion
+                            | LET MUT VARIABLE EQUAL llamadarandom'''
     
 def p_vars(p):
     '''vars : VARIABLE
@@ -164,7 +167,9 @@ def p_definicionfuncion(p):
 '''
 
 def p_funciongenerica(p):
-    '''funciongenerica : FN VARIABLE LPAREN RPAREN LBRACKET program RBRACKET'''
+    '''funciongenerica : FN VARIABLE LPAREN RPAREN LBRACKET program RBRACKET
+                        | FN MAIN LPAREN RPAREN LBRACKET program RBRACKET'''
+
 
 #FAUSTO JACOME
 def p_array(p):
@@ -180,6 +185,11 @@ def p_funcionesarray(p):
                         | VARIABLE DOT IS_EMPTY LPAREN RPAREN SEMICOLON
                         | VARIABLE DOT CLEAR LPAREN RPAREN SEMICOLON
                         | VARIABLE DOT ITER LPAREN RPAREN SEMICOLON'''
+
+def p_import(p):
+    ''' import : USE VARIABLE DOUBLE_POINT DOUBLE_POINT VARIABLE SEMICOLON'''
+def p_llamadarandom(p):
+    ''' llamadarandom : VARIABLE DOUBLE_POINT DOUBLE_POINT VARIABLE LPAREN RPAREN SEMICOLON'''
 
 
 #ALEJANDRO DONOSO
@@ -248,6 +258,7 @@ def p_opbasicas(p):
                    | STRING DOT TO_STRING LPAREN RPAREN
                    | VARIABLE LPAREN variables RPAREN
                    | VEC EXCLAMATION L_BRACKET numeros R_BRACKET
+                   | VARIABLE DOT VARIABLE LPAREN RPAREN 
                    '''
 
 
